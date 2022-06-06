@@ -9,9 +9,9 @@
                 <field name="teacher_name" />
                 <field name="gender" />
                 <field name="birthday" />
-                <field name="phone_number" widget="phone"/>
+                <field name="phone_number" widget="phone" />
                 <field name="address" />
-                <field name='email' widget="email"/>
+                <field name='email' widget="email" />
                 <field name="class_id" />
             </tree>
         </field>
@@ -28,22 +28,21 @@
                         <field name="class_id" />
                     </group>
                     <notebook>
+                        <page string="information">
+                            <group>
+                                <field name="gender" />
+                                <field name="birthday" />
+                                <field name="phone_number" widget="phone" />
+                                <field name="address" />
+                            </group>
+                        </page>
+
                         <page string="security">
                             <group>
                                 <field name='email' />
                                 <field name="password" password="True" />
                             </group>
                         </page>
-                        <page string="information">
-                            <group>
-                                <field name="gender" />
-                                <field name="birthday" />
-                                <field name="phone_number" widget="phone"/>
-                                <field name="address" />
-                            </group>
-
-                        </page>
-
                     </notebook>
                 </sheet>
             </form>
@@ -66,8 +65,8 @@
                 </group>
 
                 <group expand='0' string='Group by...'>
-                    <filter string='Gender' name="gender_group" context="{'group_by': 'gender'}"/>
-                    <filter string='Class list' name="class_group" context="{'group_by': 'class_id'}"/>
+                    <filter string='Gender' name="gender_group" context="{'group_by': 'gender'}" />
+                    <filter string='Class list' name="class_group" context="{'group_by': 'class_id'}" />
                 </group>
             </search>
 

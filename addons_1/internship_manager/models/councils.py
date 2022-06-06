@@ -1,24 +1,28 @@
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
-Send_mail = [('haven\'t sent mail yet', 'haven\'t sent mail yet'),
-             ('sent the first notification email',
-              'sent the first notification email'),
-             ('emailed the final notification',
-              'emailed the final notification')
-             ]
+location_list = [('C5.501', 'C5.501'),
+                 ('C5.502', 'C5.502'),
+                 ('C5.503', 'C5.503'),
+                 ('C5.504', 'C5.504'),
+                 ('C5.505', 'C5.505'),
+                 ('C5.506', 'C5.506'),
+                 ('C5.507', 'C5.507'),
+                 ]
 
-Type_list = [('Submit a Report', 'Submit a Report'), (
-    'Edit topic', 'Edit topic'), ('No announcement yet', 'No announcement yet')]
+exam_forms_list = [('online exam', 'online exam'), (
+    'offline exam', 'offline exam')]
 
 
 class councils(models.Model):
     _name = 'councils'
     _description = 'council list'
-    _rec_name = 'plan_name'
+    _rec_name = 'course_id'
 
-    plan_name = fields.Char(string='Plan name', required=True)
-    course_id = fields.Many2one(comodel_name='courses', string='Course name',required=True)
+    teacher_id = fields.Many2one(
+        comodel_name='teachers', string='Teacher name', required=True)
+    course_id = fields.Many2one(
+        comodel_name='courses', string='Course name', required=True)
 
     course_start_time = fields.Date(
         related='course_id.start_time', string='Course start time', store=True)
@@ -26,13 +30,12 @@ class councils(models.Model):
     course_end_time = fields.Date(
         related='course_id.end_time', string='Course end time', store=True)
 
-    type = fields.Selection(Type_list)
-    send_mail = fields.Selection(Send_mail)
-    start_time = fields.Date(string='Start time',required=True)
-    end_time = fields.Date(string='End time',required=True)
+    exam_forms = fields.Selection(exam_forms_list)
+    location = fields.Selection(location_list)
 
-    _sql_constraints = [
-        ('plan_name', 'UNIQUE (plan_name)', 'The plan name already exists')]
+    start_time = fields.Date(string='Start time', required=True)
+    end_time = fields.Date(string='End time', required=True)
+
     # _sql_constraints = [
     #     ('course_id', 'UNIQUE (course_id)', 'The course already exists')]
 

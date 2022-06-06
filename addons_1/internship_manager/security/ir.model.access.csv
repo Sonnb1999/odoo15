@@ -5,3 +5,4 @@ access_classes,access.classes,model_classes,base.group_user,1,1,1,1
 access_teachers,access.teachers,model_teachers,base.group_user,1,1,1,1
 access_plans,access.plans,model_plans,base.group_user,1,1,1,1
 access_instructors,access.instructors,model_instructors,base.group_user,1,1,1,1
+access_councils,access.councils,model_councils,base.group_user,1,1,1,1

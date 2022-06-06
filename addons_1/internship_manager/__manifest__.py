@@ -24,6 +24,7 @@
         'views/plans.xml',
         'views/classes.xml',
         'views/students.xml',
+        'views/councils.xml',
     ],
     'images': ['static/description/icon.png'],
     'installable': True,

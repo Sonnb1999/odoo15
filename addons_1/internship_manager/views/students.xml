@@ -86,13 +86,6 @@
                                 <field name="address" />
                             </group>
                         </page>
-                        <page string="infomation">
-                            <group>
-                                <field name="birthday" />
-                                <field name="phone_number" widget="phone" />
-                                <field name="address" />
-                            </group>
-                        </page>
                     </notebook>
                 </sheet>
             </form>
