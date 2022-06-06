@@ -17,7 +17,7 @@
         # 'data/sequence.xml',
         # 'data/data.xml',
         # 'data/cron.xml',
-        # 'wizards/create_appointment.xml',
+        'wizards/batch_update_student.xml',
         'views/courses.xml',
         'views/instructors.xml',
         'views/teachers.xml',
