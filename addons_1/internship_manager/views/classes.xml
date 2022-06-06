@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="classes_view_tree" model="ir.ui.view">
+        <field name="name">classes.view.tree</field>
+        <field name="model">classes</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="class_name" />
+                <field name="orientation_class" />
+                <field name="course_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="classes_action" model="ir.actions.act_window">
+        <field name="name">classes</field>
+        <field name="res_model">classes</field>
+        <field name="view_mode">tree,form</field>
+        <!-- <field name="domain">[]</field>
+        <field name="context">{}</field> -->
+        <!-- <field name="help" type="html">
+            
+        </field> -->
+    </record>
+
+    <menuitem id="internship_root" name="internship management" sequence="-1" />
+    <menuitem id="class_management" name="Class management"  parent="internship_root" sequence="-1" />
+    <menuitem id="class_sub" name="Class List" action="classes_action"  parent="class_management" sequence="10" />
+</odoo>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="students_view_tree" model="ir.ui.view">
+        <field name="name">students.view.tree</field>
+        <field name="model">students</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="student_name" />
+                <field name="student_code" />
+                <field name="gender" />
+                <field name="birthday" />
+                <field name="phone_number" widget="phone" />
+                <field name="address" />
+                <field name="class_id" />
+                <field name="course_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="students_view_kanban" model="ir.ui.view">
+        <field name="name">students.view.kanban</field>
+        <field name="model">students</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="id" />
+                <field name="student_name" />
+                <field name="student_image" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="o_kanban_image">
+                                <img alt="Avatar" t-att-src="kanban_image('students', 'student_image', record.id.raw_value)" />
+                            </div>
+                            <div class="oe_kanban_details">
+                                <ul>
+                                    <li class="text-success float-right mb4">
+                                        <i class="fa fa-circle" role="img" aria-label="Ok" title="Ok" />
+                                    </li>
+                                    <li class="mb4">
+                                        <strong>
+                                            <field name="student_name" />
+                                        </strong>
+                                    </li>
+                                    <li>
+                                        <strong>
+                                            <field name="student_code" />
+                                        </strong>
+                                    </li>
+                                    <li>
+                                        <strong>
+                                            <field name="birthday" />
+                                        </strong>
+
+                                    </li>
+                                    <!-- <li class="badge badge-pill float-right mb4" t-if="record.lang.raw_value"><field name="lang"/></li> -->
+                                    <!-- <li class="mb4" t-if="record.login.raw_value" title="Login"><i class="fa fa-envelope" role="img" aria-label="Login"/> <field name="login"/></li> -->
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="students_view_form" model="ir.ui.view">
+        <field name="name">students.view.form</field>
+        <field name="model">students</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <field name="student_image" widget='image' class="oe_avatar" options='{"zoom": true}' />
+                    <group>
+                        <field name="student_name" />
+                        <field name="student_code" />
+                        <field name="class_id" />
+                        <field name="course_id" />
+                    </group>
+                    <notebook>
+                        <page string="infomation">
+                            <group>
+                                <field name="gender" />
+                                <field name="birthday" />
+                                <field name="phone_number" widget="phone" />
+                                <field name="address" />
+                            </group>
+                        </page>
+                        <page string="infomation">
+                            <group>
+                                <field name="birthday" />
+                                <field name="phone_number" widget="phone" />
+                                <field name="address" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="students_view_search" model="ir.ui.view">
+        <field name="name">students.view.search</field>
+        <field name="model">students</field>
+        <field name="arch" type="xml">
+            <search string="">
+                <field name="student_name" />
+                <!-- <field name='email' /> -->
+                <field name="class_id" />
+                <group expand='0' string='Filters'>
+                    <separator />
+                    <filter name="male_filter" string="Male" domain="[('gender', '=',  'male')]" />
+                    <filter name="female_filter" string="Female" domain="[('gender', '=',  'female')]" />
+                </group>
+
+                <group expand='0' string='Group by...'>
+                    <filter string='Gender' name="gender_group" context="{'group_by': 'gender'}" />
+                    <filter string='Class list' name="class_group" context="{'group_by': 'class_id'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="students_action" model="ir.actions.act_window">
+        <field name="name">Students</field>
+        <field name="res_model">students</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <!-- <field name="domain">[]</field>
+        <field name="context">{}</field> -->
+        <!-- <field name="help" type="html">
+            
+        </field> -->
+    </record>
+
+    <menuitem id="internship_root" name="internship management" sequence="-1" />
+    <menuitem id="class_management" name="Class management" parent="internship_root" sequence="0" />
+    <menuitem id="student_sub" name="Student List" action="students_action" parent="class_management" sequence="10" />
+</odoo>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="teachers_view_tree" model="ir.ui.view">
+        <field name="name">teachers.view.tree</field>
+        <field name="model">teachers</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="teacher_name" />
+                <field name="gender" />
+                <field name="birthday" />
+                <field name="phone_number" widget="phone"/>
+                <field name="address" />
+                <field name='email' widget="email"/>
+                <field name="class_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="teachers_view_form" model="ir.ui.view">
+        <field name="name">teachers.view.form</field>
+        <field name="model">teachers</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="teacher_name" />
+                        <field name="class_id" />
+                    </group>
+                    <notebook>
+                        <page string="security">
+                            <group>
+                                <field name='email' />
+                                <field name="password" password="True" />
+                            </group>
+                        </page>
+                        <page string="information">
+                            <group>
+                                <field name="gender" />
+                                <field name="birthday" />
+                                <field name="phone_number" widget="phone"/>
+                                <field name="address" />
+                            </group>
+
+                        </page>
+
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="teachers_view_search" model="ir.ui.view">
+        <field name="name">teachers.view.search</field>
+        <field name="model">teachers</field>
+        <field name="arch" type="xml">
+            <search string="">
+                <field name="teacher_name" />
+                <field name='email' />
+                <field name="class_id" />
+
+                <group expand='0' string='Filters'>
+                    <separator />
+                    <filter name="male_filter" string="Male" domain="[('gender', '=',  'male')]" />
+                    <filter name="female_filter" string="Female" domain="[('gender', '=',  'female')]" />
+                </group>
+
+                <group expand='0' string='Group by...'>
+                    <filter string='Gender' name="gender_group" context="{'group_by': 'gender'}"/>
+                    <filter string='Class list' name="class_group" context="{'group_by': 'class_id'}"/>
+                </group>
+            </search>
+
+        </field>
+    </record>
+    <record id="teachers_action" model="ir.actions.act_window">
+        <field name="name">teachers</field>
+        <field name="res_model">teachers</field>
+        <field name="view_mode">tree,form</field>
+        <!-- <field name="domain">[]</field>
+        <field name="context">{}</field> -->
+        <!-- <field name="help" type="html">
+            
+        </field> -->
+    </record>
+
+    <menuitem id="internship_root" name="internship management" sequence="-1" />
+    <menuitem id="class_management" name="Class management" parent="internship_root" sequence="0" />
+    <menuitem id="teacher_sub" name="teacher List" action="teachers_action" parent="class_management" sequence="10" />
+</odoo>

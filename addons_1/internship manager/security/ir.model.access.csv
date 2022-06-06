@@ -1,4 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_students,access.students,model_students,base.group_user,1,1,1,1
-access_courses,access.courses,model_courses,base.group_user,1,1,1,1
-access_classes,access.classes,model_classes,base.group_user,1,1,1,1

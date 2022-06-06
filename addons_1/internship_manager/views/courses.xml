@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="courses_view_tree" model="ir.ui.view">
+        <field name="name">courses.view.tree</field>
+        <field name="model">courses</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="course_name" />
+                <field name="educational_system" />
+                <field name="type_of_internship" />
+                <field name="start_time" />
+                <field name="end_time" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="courses_view_form" model="ir.ui.view">
+        <field name="name">courses.view.form</field>
+        <field name="model">courses</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="course_name" />
+                    </group>
+                    <notebook>
+                        <page string="Time">
+                            <group>
+                                <field name="start_time" />
+                                <field name="end_time" />
+                            </group>
+
+                        </page>
+                        <page string="description">
+                            <group>
+                                <field name="educational_system" />
+                                <field name="type_of_internship" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    
+    <record id="courses_action" model="ir.actions.act_window">
+        <field name="name">courses</field>
+        <field name="res_model">courses</field>
+        <field name="view_mode">tree,form</field>
+        <!-- <field name="domain">[]</field>
+        <field name="context">{}</field> -->
+        <!-- <field name="help" type="html">
+            
+        </field> -->
+    </record>
+
+    <menuitem id="internship_root" name="internship management" sequence="-1" />
+    <menuitem id="course_management" name="Course management" parent="internship_root" sequence="-1" />
+    <menuitem id="course_sub" name="Course List" action="courses_action" parent="course_management" sequence="10" />
+</odoo>

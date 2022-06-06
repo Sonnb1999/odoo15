@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="instructors_view_tree" model="ir.ui.view">
+        <field name="name">instructors.view.tree</field>
+        <field name="model">instructors</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="student_id" />
+                <field name="student_code" />
+                <field name="birthday" />
+                <field name="class_id" />
+                <!-- <field name="course_id" /> -->
+
+                <field name="teacher_id" />
+                <field name="email" widget='email'/>
+                <field name="phone_number" widget='phone'/>
+               
+            </tree>
+        </field>
+    </record>
+
+    <record id="instructors_view_graph" model="ir.ui.view">
+        <field name="name">instructors.view.graph</field>
+        <field name="model">instructors</field>
+        <field name="arch" type="xml">
+            <graph string="number of class" type="bar" >
+                <field name="class_id" group="True"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="instructors_view_kanban" model="ir.ui.view">
+        <field name="name">instructors.view.kanban</field>
+        <field name="model">instructors</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="student_id" />
+                <field name="student_image" />
+
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="o_kanban_image">
+                                <img alt="Avatar" t-att-src="kanban_image('students', 'student_image', record.student_id.raw_value)" />
+                            </div>
+                            <div class="oe_kanban_details">
+                                <ul>
+                                    <li class="text-success float-right mb4">
+                                        <i class="fa fa-circle" role="img" aria-label="Ok" title="Ok" />
+                                    </li>
+                                    <!-- <li class="text-danger float-right mb4">
+                                        <i class="fa fa-circle" role="img" aria-label="Invalid" title="Invalid"/>
+                                    </li> -->
+                                    <li class="mb4">
+                                        <strong>
+                                            <field name="student_id" />
+                                        </strong>
+                                    </li>
+                                    <li>
+                                        <strong>
+                                            <field name="student_code" />
+                                        </strong>
+                                    </li>
+                                    <li>
+                                        <strong>
+                                            <field name="birthday" />
+                                        </strong>
+
+                                    </li>
+                                    <!-- <li class="badge badge-pill float-right mb4" t-if="record.lang.raw_value"><field name="lang"/></li> -->
+                                    <!-- <li class="mb4" t-if="record.login.raw_value" title="Login"><i class="fa fa-envelope" role="img" aria-label="Login"/> <field name="login"/></li> -->
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <record id="instructors_view_form" model="ir.ui.view">
+        <field name="name">instructors.view.form</field>
+        <field name="model">instructors</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="student_id" />
+                        <field name="student_code" />
+                        <field name="birthday" />
+                        <field name="class_id" />
+                        <field name="course_id" />
+                    </group>
+                    <group>
+                        <field name="teacher_id" />
+                        <field name="email" widget='email'/>
+                        <field name="phone_number" widget='phone' />
+
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="instructors_action" model="ir.actions.act_window">
+        <field name="name">instructors</field>
+        <field name="res_model">instructors</field>
+        <field name="view_mode">tree,form,kanban,graph</field>
+        <!-- <field name="domain">[]</field>
+        <field name="context">{}</field> -->
+        <!-- <field name="help" type="html">
+            
+        </field> -->
+    </record>
+    <menuitem id="instructor_sub" name="Instructor List" action="instructors_action" parent="course_management" sequence="10" />
+</odoo>
