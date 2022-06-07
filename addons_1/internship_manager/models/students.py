@@ -28,6 +28,8 @@ class students(models.Model):
     _sql_constraints = [
         ('student_code', 'UNIQUE (student_code)', 'student already exists')]
 
+
+
     @api.constrains('phone_number')
     def validate_number(self):
         for record in self:
@@ -38,3 +40,5 @@ class students(models.Model):
                     raise ValidationError('the phone number is wrong')
                 else:
                     pass
+
+   

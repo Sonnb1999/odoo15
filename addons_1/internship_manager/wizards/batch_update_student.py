@@ -16,12 +16,15 @@ class BatchUpdateStudentWizard(models.TransientModel):
     ], string='Gender', default=False)
     class_id = fields.Many2one('classes', string='class', default=False)
     address = fields.Char(string='address')
+    student_image = fields.Binary(string='student_image')
 
     def multi_update(self):
         ids = self.env.context['active_ids']  # selected record ids
         students = self.env["students"].browse(ids)
         new_data = {}
 
+        if self.student_image:
+            new_data["student_image"] = self.student_image
         if self.address:
             new_data["address"] = self.address
         if self.gender:

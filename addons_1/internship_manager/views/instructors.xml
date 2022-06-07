@@ -10,23 +10,39 @@
                 <field name="student_code" />
                 <field name="birthday" />
                 <field name="class_id" />
-                <!-- <field name="course_id" /> -->
-
                 <field name="teacher_id" />
-                <field name="email" widget='email'/>
-                <field name="phone_number" widget='phone'/>
-               
+                <field name="email" widget='email' />
+                <field name="phone_number" widget='phone' />
+                <!-- <field name="count_student" /> -->
             </tree>
         </field>
     </record>
 
-    <record id="instructors_view_graph" model="ir.ui.view">
+    <!-- <record id="instructors_view_graph" model="ir.ui.view">
         <field name="name">instructors.view.graph</field>
         <field name="model">instructors</field>
         <field name="arch" type="xml">
-            <graph string="number of class" type="bar" >
-                <field name="class_id" group="True"/>
+            <graph string="number of class" type="bar">
+                <field name="class_id" />
+                <field name="teacher_id" />
             </graph>
+        </field>
+    </record> -->
+
+    <record id="instructors_view_search" model="ir.ui.view">
+        <field name="name">instructors.view.search</field>
+        <field name="model">instructors</field>
+        <field name="arch" type="xml">
+            <search string="">
+                <field name="student_id"/>
+                <field name="course_id"/>
+                <field name="class_id"/>
+
+                <group expand='0' string='Group by...'>
+                    <filter string='Class list' name="class_group" context="{'group_by': 'class_id'}" />
+                    <filter string='Course list' name="course_group" context="{'group_by': 'course_id'}" />
+                </group>
+            </search>
         </field>
     </record>
 
@@ -37,7 +53,6 @@
             <kanban>
                 <field name="student_id" />
                 <field name="student_image" />
-
                 <templates>
                     <t t-name="kanban-box">
                         <div t-attf-class="oe_kanban_global_click">
@@ -68,8 +83,6 @@
                                         </strong>
 
                                     </li>
-                                    <!-- <li class="badge badge-pill float-right mb4" t-if="record.lang.raw_value"><field name="lang"/></li> -->
-                                    <!-- <li class="mb4" t-if="record.login.raw_value" title="Login"><i class="fa fa-envelope" role="img" aria-label="Login"/> <field name="login"/></li> -->
                                 </ul>
                             </div>
                         </div>
@@ -93,9 +106,9 @@
                     </group>
                     <group>
                         <field name="teacher_id" />
-                        <field name="email" widget='email'/>
+                        <field name="student_count" />
+                        <field name="email" widget='email' />
                         <field name="phone_number" widget='phone' />
-
                     </group>
                 </sheet>
             </form>

@@ -9,8 +9,8 @@
                 <field name="course_name" />
                 <field name="educational_system" />
                 <field name="type_of_internship" />
-                <field name="start_time" />
-                <field name="end_time" />
+                <field name="start_time" widget="date" options="{'format': 'yyyy/MM/dd'}"/>
+                <field name="end_time" widget="date" options="{'format': 'dd/MM/yyyy'}"/>
             </tree>
         </field>
     </record>
@@ -45,6 +45,20 @@
     </record>
 
     
+    <record id="courses_view_kanban" model="ir.ui.view">
+        <field name="name">courses.view.kanban</field>
+        <field name="model">courses</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <templates>
+                    <t t-name="kanban-box">
+                        
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
     <record id="courses_action" model="ir.actions.act_window">
         <field name="name">courses</field>
         <field name="res_model">courses</field>
@@ -56,7 +70,5 @@
         </field> -->
     </record>
 
-    <menuitem id="internship_root" name="internship management" sequence="-1" />
-    <menuitem id="course_management" name="Course management" parent="internship_root" sequence="-1" />
-    <menuitem id="course_sub" name="Course List" action="courses_action" parent="course_management" sequence="10" />
+    <menuitem id="course_sub" name="Course List" action="courses_action" parent="course_management" sequence="-1" />
 </odoo>

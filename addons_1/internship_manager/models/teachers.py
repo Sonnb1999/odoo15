@@ -20,6 +20,8 @@ class teachers(models.Model):
         ('female', 'Female')
     ], string='Gender', default='male')
 
+    # instructor_id = fields.Many2one(related='field_name')
+
     class_id = fields.Many2one(comodel_name='classes', string='class name')
     # _sql_constraints = [
     #     ('teacher_name', 'UNIQUE (teacher_name)', 'teacher all already exists')]
@@ -42,3 +44,8 @@ class teachers(models.Model):
             # vals.update(
             #     {'teacher_id': user_id.teacher_id and user_id.teacher_id.id or False})
         return super(teachers, self).create(vals)
+
+    # @api.constrains('student_name')
+    # def cout_student(self):
+    #     for record in self:
+    #         pass

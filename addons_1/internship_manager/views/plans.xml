@@ -10,8 +10,8 @@
                 <field name="plan_name" />
                 <field name="send_mail" />
                 <field name="type" />
-                <field name="start_time" />
-                <field name="end_time" />
+                <field name="start_time"/>
+                <field name="end_time"/>
             </tree>
         </field>
     </record>
@@ -35,8 +35,8 @@
                                 <field name="course_end_time" />
                             </group>
                             <group>
-                                <field name="start_time" />
-                                <field name="end_time" />
+                                <field name="start_time"/>
+                                <field name="end_time"/>
                             </group>
 
                         </page>
@@ -46,17 +46,25 @@
         </field>
     </record>
 
+    <record id="plans_view_calendar" model="ir.ui.view">
+        <field name="name">plans.view.calendar</field>
+        <field name="model">plans</field>
+        <field name="arch" type="xml">
+            <calendar string="" date_start="course_start_time" color="course_end_time">
+                <field name="course_id" />
+            </calendar>
+        </field>
+    </record>
+
     <record id="plans_action" model="ir.actions.act_window">
         <field name="name">plans</field>
         <field name="res_model">plans</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">calendar,tree,form</field>
         <!-- <field name="domain">[]</field>
         <field name="context">{}</field> -->
         <!-- <field name="help" type="html">
         </field> -->
     </record>
 
-    <menuitem id="internship_root" name="internship management" sequence="-1" />
-    <menuitem id="course_management" name="Course management" parent="internship_root" sequence="0" />
-    <menuitem id="plan_sub" name="plan List" action="plans_action" parent="course_management" sequence="10" />
+    <menuitem id="plan_sub" name="plan List" action="plans_action" parent="course_management" sequence="1" />
 </odoo>

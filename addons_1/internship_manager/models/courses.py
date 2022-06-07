@@ -1,4 +1,5 @@
 from odoo import api, fields, models
+from odoo.exceptions import ValidationError
 type_of_education = [('formal university', 'formal university'),
                      ('affiliated university', 'affiliated university')]
 
@@ -20,3 +21,9 @@ class courses(models.Model):
 
     _sql_constraints = [
         ('course_name', 'UNIQUE (course_name)', 'Course all already exists')]
+
+    @api.constrains('start_time', 'end_time')
+    def time(self):
+        for record in self:
+            if record.start_time > record.end_time:
+                raise ValidationError('start time < end time')

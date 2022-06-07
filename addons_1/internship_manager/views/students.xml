@@ -30,7 +30,7 @@
                     <t t-name="kanban-box">
                         <div t-attf-class="oe_kanban_global_click">
                             <div class="o_kanban_image">
-                                <img alt="Avatar" t-att-src="kanban_image('students', 'student_image', record.id.raw_value)" />
+                                <img alt="Avatar" t-att-src="kanban_image('students', 'student_image', record.id.raw_value)" options="{'zoom': true, 'zoom_delay': 1000, 'background': true, 'preventClicks': false}" />
                             </div>
                             <div class="oe_kanban_details">
                                 <ul>
@@ -51,7 +51,6 @@
                                         <strong>
                                             <field name="birthday" />
                                         </strong>
-
                                     </li>
                                     <!-- <li class="badge badge-pill float-right mb4" t-if="record.lang.raw_value"><field name="lang"/></li> -->
                                     <!-- <li class="mb4" t-if="record.login.raw_value" title="Login"><i class="fa fa-envelope" role="img" aria-label="Login"/> <field name="login"/></li> -->
@@ -114,18 +113,25 @@
         </field>
     </record>
 
+    <record id="students_view_graph" model="ir.ui.view">
+        <field name="name">students.view.graph</field>
+        <field name="model">students</field>
+        <field name="arch" type="xml">
+            <graph string="" type="bar">
+                <field name="class_id" />
+            </graph>
+        </field>
+    </record>
+
     <record id="students_action" model="ir.actions.act_window">
         <field name="name">Students</field>
         <field name="res_model">students</field>
-        <field name="view_mode">tree,form,kanban</field>
+        <field name="view_mode">tree,form,kanban,graph</field>
         <!-- <field name="domain">[]</field>
         <field name="context">{}</field> -->
         <!-- <field name="help" type="html">
-            
         </field> -->
     </record>
 
-    <menuitem id="internship_root" name="internship management" sequence="-1" />
-    <menuitem id="class_management" name="Class management" parent="internship_root" sequence="0" />
     <menuitem id="student_sub" name="Student List" action="students_action" parent="class_management" sequence="10" />
 </odoo>
