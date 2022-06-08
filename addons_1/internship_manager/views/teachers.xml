@@ -7,12 +7,14 @@
         <field name="arch" type="xml">
             <tree string="">
                 <field name="teacher_name" />
-                <field name="gender" />
                 <field name="birthday" />
-                <field name="phone_number" widget="phone" />
+                <field name="gender" />
                 <field name="address" />
+                <field name="teacher_country" />
+                <field name="teacher_state" />
                 <field name='email' widget="email" />
-                <field name="class_id" />
+                <field name="phone_number" widget="phone" />
+
             </tree>
         </field>
     </record>
@@ -34,6 +36,9 @@
                                 <field name="birthday" />
                                 <field name="phone_number" widget="phone" />
                                 <field name="address" />
+                                <field name="teacher_country" />
+                                <field name="teacher_state" domain="" />
+
                             </group>
                         </page>
 

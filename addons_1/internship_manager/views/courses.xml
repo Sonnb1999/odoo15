@@ -9,8 +9,10 @@
                 <field name="course_name" />
                 <field name="educational_system" />
                 <field name="type_of_internship" />
-                <field name="start_time" widget="date" options="{'format': 'yyyy/MM/dd'}"/>
-                <field name="end_time" widget="date" options="{'format': 'dd/MM/yyyy'}"/>
+                <field name="start_time" widget="date" />
+                <field name="end_time" widget="date" />
+                <field name='student_ids' />
+                <field name='instructor_ids' />
             </tree>
         </field>
     </record>
@@ -23,6 +25,8 @@
                 <sheet>
                     <group>
                         <field name="course_name" />
+                        <field name="educational_system" />
+                        <field name="type_of_internship" />
                     </group>
                     <notebook>
                         <page string="Time">
@@ -32,11 +36,17 @@
                             </group>
 
                         </page>
-                        <page string="description">
-                            <group>
-                                <field name="educational_system" />
-                                <field name="type_of_internship" />
-                            </group>
+                        <page string="student list">
+                            <field name='student_ids' readonly="1" />
+
+                        </page>
+                        <page string="instructor list">
+                            <field name='instructor_ids' readonly="1" widget='one2many'>
+                                <tree string="">
+                                    <field name="student_id" />
+                                    <field name="teacher_id" />
+                                </tree>
+                            </field>
                         </page>
                     </notebook>
                 </sheet>
@@ -44,16 +54,14 @@
         </field>
     </record>
 
-    
+
     <record id="courses_view_kanban" model="ir.ui.view">
         <field name="name">courses.view.kanban</field>
         <field name="model">courses</field>
         <field name="arch" type="xml">
             <kanban>
                 <templates>
-                    <t t-name="kanban-box">
-                        
-                    </t>
+                    <t t-name="kanban-box"></t>
                 </templates>
             </kanban>
         </field>

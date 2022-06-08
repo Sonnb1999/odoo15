@@ -20,11 +20,21 @@ class teachers(models.Model):
         ('female', 'Female')
     ], string='Gender', default='male')
 
-    # instructor_id = fields.Many2one(related='field_name')
+    teacher_country = fields.Many2one(
+        comodel_name='res.country', string='country', store=True,default= 241)
+    teacher_state = fields.Many2one(
+        'res.country.state', string="State", store=True)
 
     class_id = fields.Many2one(comodel_name='classes', string='class name')
-    # _sql_constraints = [
-    #     ('teacher_name', 'UNIQUE (teacher_name)', 'teacher all already exists')]
+
+    @api.onchange('teacher_country')
+    def set_values_to(self):
+        if self.teacher_country:
+            ids = self.env['res.country.state'].search(
+                [('country_id', '=', self.teacher_country.id)])
+            return {
+                'domain': {'teacher_state': [('id', 'in', ids.ids)], }
+            }
 
     @api.constrains('phone_number')
     def validate_number(self):
@@ -32,7 +42,7 @@ class teachers(models.Model):
             if record.phone_number:
                 if re.findall("[a-zA-Z]", record.phone_number):
                     raise ValidationError('the phone number is not true')
-                elif len(record.phone_number) < 10 or len(record.phone_number) > 11:
+                elif len(record.phone_number) < 10 or len(record.phone_number) >= 11:
                     raise ValidationError('the phone number is wrong')
                 else:
                     pass

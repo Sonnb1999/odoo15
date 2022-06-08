@@ -1,11 +1,12 @@
+import datetime
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
-Send_mail = [('haven\'t sent mail yet', 'haven\'t sent mail yet'),
-             ('sent the first notification email',
-              'sent the first notification email'),
-             ('emailed the final notification',
-              'emailed the final notification')
+Send_mail = [('Haven\'t sent mail yet', 'Haven\'t sent mail yet'),
+             ('Sent the first notification email',
+              'Sent the first notification email'),
+             ('Emailed the final notification',
+              'Emailed the final notification')
              ]
 
 Type_list = [('Submit a Report', 'Submit a Report'), (
@@ -15,10 +16,12 @@ Type_list = [('Submit a Report', 'Submit a Report'), (
 class plans(models.Model):
     _name = 'plans'
     _description = 'plan list'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _rec_name = 'plan_name'
 
     plan_name = fields.Char(string='Plan name', required=True)
-    course_id = fields.Many2one(comodel_name='courses', string='Course name',required=True)
+    course_id = fields.Many2one(
+        comodel_name='courses', string='Course name', required=True)
 
     course_start_time = fields.Date(
         related='course_id.start_time', string='Course start time', store=True)
@@ -28,8 +31,13 @@ class plans(models.Model):
 
     type = fields.Selection(Type_list)
     send_mail = fields.Selection(Send_mail)
-    start_time = fields.Date(string='Start time',required=True)
-    end_time = fields.Date(string='End time',required=True)
+    start_time = fields.Date(string='Start time', required=True)
+    end_time = fields.Date(string='End time', required=True)
+
+    instructors_count = fields.Char('count', compute='i_count')
+
+    def i_count(self):
+        pass
 
     _sql_constraints = [
         ('plan_name', 'UNIQUE (plan_name)', 'The plan name already exists')]
@@ -52,3 +60,28 @@ class plans(models.Model):
 
                 elif record.end_time < record.course_start_time:
                     raise ValidationError('the end time is not suitable')
+
+    # auto send_mail
+
+    def sendMail(self):
+        pass
+
+    def sendMailvalidate(self):
+        dateNow = datetime.datetime.now()
+        date_send_mail = dateNow + datetime.timedelta(days=2)
+
+        for record in self:
+            if record.type == 'No announcement yet':
+                raise ValidationError('ko gui mail')
+            else:
+                # gui mail dau tien
+                if record.send_mail == 'Haven\'t sent mail yet':
+                    if date_send_mail == record.start_time:
+                        raise ValidationError('se gui mail')
+                # gui mail thu 2
+                elif record.send_mail == 'Sent the first notification email':
+                    if date_send_mail == record.end_time:
+                        raise ValidationError('da gui mail 1')
+                # da gui both mail
+                elif record.send_mail == 'Emailed the final notification':
+                    raise ValidationError('da gui mail 2')

@@ -96,7 +96,7 @@
         <field name="model">students</field>
         <field name="arch" type="xml">
             <search string="">
-                <field name="student_name" />
+                <field name="student_name" nolabel='1' />
                 <!-- <field name='email' /> -->
                 <field name="class_id" />
                 <group expand='0' string='Filters'>

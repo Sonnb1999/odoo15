@@ -18,6 +18,10 @@ class courses(models.Model):
     type_of_internship = fields.Selection(Type_of_internship)
     start_time = fields.Date(string='start_time')
     end_time = fields.Date(string='end_time')
+    student_ids = fields.One2many(
+        'students', 'course_id', string='students', column1='student_name')
+    instructor_ids = fields.One2many(
+        'instructors', 'course_id', string='instructors')
 
     _sql_constraints = [
         ('course_name', 'UNIQUE (course_name)', 'Course all already exists')]
