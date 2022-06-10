@@ -12,7 +12,7 @@
     'depends': ['project'],
     'demo': [],
     'data': [
-        # 'security/security.xml',
+        'security/security.xml',
         'security/ir.model.access.csv',
         # 'data/partner_tag_data.xml',
         # 'data/partners.tag.csv',
