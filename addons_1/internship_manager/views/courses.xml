@@ -5,15 +5,16 @@
         <field name="name">courses.view.tree</field>
         <field name="model">courses</field>
         <field name="arch" type="xml">
-            <tree string="" >
-                <field name="course_name" optional="show"/>
-                <field name="educational_system" optional="show"/>
+            <tree string="">
+                <field name="course_name" optional="show" />
+                <field name="educational_system" optional="show" />
                 <field name="type_of_internship" optional="show" decoration-success="type_of_internship == 'professional_practice'" decoration-info="type_of_internship == 'internship'" decoration-warning="type_of_internship == 'graduation_thesis'" widget="badge" />
                 <field name="start_time" optional="show" widget="date" />
-                <field name="end_time" widget="date" optional="show"/>
-                <field name='student_ids' optional="show"/>
-                <field name='instructor_ids' optional="show"/>
-                <field name="activity_ids" widget="list_activity" optional="show"/>
+                <field name="end_time" widget="date" optional="show" />
+                <field name='student_ids' optional="show" />
+                <field name='instructor_ids' optional="show" />
+                <field name="activity_ids" widget="list_activity" optional="show" />
+                <field name="tag_partners" widget="many2many_tags" options="{'color_field':'color'}"/>
             </tree>
         </field>
     </record>
@@ -24,31 +25,37 @@
         <field name="arch" type="xml">
             <form string="">
                 <header>
-                    <field name="state" widget="statusbar" options="{'clickable': '1'}" statusbar_visible="draft,in_consultation,done" nolabel="1" />
-                    <button name="action_test" string="Send e-mail" type="object" class="oe_highlight" confirm="this ok" help="test action" />
+                    <!-- show when states == cancel -->
+                    <button name="action_draft" class="oe_highlight" data-hotkey="q" string="Draft" type="object" states="cancel" />
+
+                    <button name="action_in_consultation" data-hotkey="q" class="oe_highlight" string="In consultation" type="object" states="draft" />
+                    <button name="action_done" class="oe_highlight" data-hotkey="q" string="Done" type="object" states="in_consultation" />
+                    <button name="action_cancel" data-hotkey="q" string="Cancel" type="object" states="done,draft,in_consultation" />
+                    <!-- options="{'clickable': '1'}" -->
+                    <field name="state" widget="statusbar" statusbar_visible="draft,in_consultation,done" nolabel="1" />
                 </header>
                 <sheet>
                     <group>
                         <field name="course_name" />
-                        <field name="educational_system" default_focus="1"/>
+                        <field name="educational_system" default_focus="1" />
                         <field name="type_of_internship" decoration-success="type_of_internship == 'professional_practice'" decoration-info="type_of_internship == 'internship'" decoration-warning="type_of_internship == 'graduation_thesis'" />
                         <field name="active_course" />
+                        <field name="tag_partners" widget="many2many_tags" options="{'color_field':'color'}" />
                     </group>
                     <notebook>
                         <page string="Time">
                             <group>
-                                <field name="start_time" default_focus="1"/>
-                                <field name="end_time" default_focus="1"/>
+                                <field name="start_time" default_focus="1" />
+                                <field name="end_time" default_focus="1" />
                             </group>
 
                         </page>
                         <page string="student list">
                             <field name='student_ids' readonly="1" />
-
                         </page>
                         <page string="instructor list">
                             <field name='instructor_ids' readonly="1" widget='one2many'>
-                                <tree string="">
+                                <tree string="" editable="top">
                                     <field name="student_id" />
                                     <field name="teacher_id" />
                                 </tree>

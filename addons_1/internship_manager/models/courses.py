@@ -41,6 +41,8 @@ class courses(models.Model):
         ('cancel', 'Cancelled'),
     ], string="status", default="draft", required=True)
 
+    tag_partners = fields.Many2many('partners', string="Tags")
+
     _sql_constraints = [
         ('course_name', 'UNIQUE (course_name)', 'Course all already exists')]
 
@@ -49,12 +51,35 @@ class courses(models.Model):
         for record in self:
             if record.start_time > record.end_time:
                 raise ValidationError('start time < end time')
-    
+
     def action_test(self):
         return {
-            'effect':{
-                'fadeout':'slow',
-                'message':'ok',
-                'type':'rainbow_man'
+            'effect': {
+                'fadeout': 'slow',
+                'message': 'ok',
+                'type': 'rainbow_man'
             }
         }
+
+    def action_draft(self):
+        for record in self:
+            record.state = "draft"
+
+    def action_in_consultation(self):
+        for record in self:
+            record.state = "in_consultation"
+
+    def action_done(self):
+        for record in self:
+            record.state = "done"
+            return {
+                'effect': {
+                    'fadeout': 'slow',
+                    'message': 'ok',
+                    'type': 'rainbow_man'
+                }
+            }
+
+    def action_cancel(self):
+        for record in self:
+            record.state = "cancel"

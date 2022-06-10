@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- root menu -->
-    <menuitem id="internship_root" name="internship" web_icon="internship_manager,static/description/icon.png" sequence="-1" />
+    <menuitem id="internship_root" name="Internship" web_icon="internship_manager,static/description/icon.png" sequence="-1" />
 
     <!-- submenu course -->
     <menuitem id="course_management" name="Course management" parent="internship_root" sequence="-1" />
@@ -9,4 +9,6 @@
     <!-- submenu class -->
     <menuitem id="class_management" name="Class management" parent="internship_root" sequence="0" />
 
+    <!-- configurations -->
+    <!-- <menuitem id="configurations" name="configurations" parent="internship_root" sequence="1" /> -->
 </odoo>

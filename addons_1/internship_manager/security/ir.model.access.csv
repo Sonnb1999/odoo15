@@ -6,4 +6,5 @@ access_teachers,access.teachers,model_teachers,base.group_user,1,1,1,1
 access_plans,access.plans,model_plans,base.group_user,1,1,1,1
 access_instructors,access.instructors,model_instructors,base.group_user,1,1,1,1
 access_councils,access.councils,model_councils,base.group_user,1,1,1,1
+access_partners,access.partners,model_partners,base.group_user,1,1,1,1
 access_students_batchupdate_wizard,access.students_batchupdate_wizard,model_students_batchupdate_wizard,base.group_user,1,1,1,1
