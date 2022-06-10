@@ -48,6 +48,9 @@
                                 </div>
                             </group>
                         </page>
+                        <page string='list'>
+                            <field name="list_instructor" />
+                        </page>
                     </notebook>
                 </sheet>
             </form>

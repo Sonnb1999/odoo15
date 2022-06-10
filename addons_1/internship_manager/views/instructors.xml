@@ -5,7 +5,7 @@
         <field name="name">instructors.view.tree</field>
         <field name="model">instructors</field>
         <field name="arch" type="xml">
-            <tree string="">
+            <tree string="" sample="1">
                 <field name="student_id" />
                 <field name="student_code" />
                 <field name="birthday" />
@@ -34,7 +34,7 @@
         <field name="model">instructors</field>
         <field name="arch" type="xml">
             <search string="">
-                <field name="student_id"/>
+                <field name="student_id" />
                 <field name="course_id"/>
                 <field name="class_id"/>
 

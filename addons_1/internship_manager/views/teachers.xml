@@ -7,6 +7,7 @@
         <field name="arch" type="xml">
             <tree string="">
                 <field name="teacher_name" />
+                <field name="user_id" widget="many2one_avatar_user"/>
                 <field name="birthday" />
                 <field name="gender" />
                 <field name="address" />
@@ -28,6 +29,8 @@
                     <group>
                         <field name="teacher_name" />
                         <field name="class_id" />
+                        <field name="user_id" widget="many2one_avatar"/>
+                        <field name="active"/>
                     </group>
                     <notebook>
                         <page string="information">
@@ -65,6 +68,7 @@
 
                 <group expand='0' string='Filters'>
                     <separator />
+                    <filter name="active_filter" string='active is false'  domain="[('active', '=',  False)]" />
                     <filter name="male_filter" string="Male" domain="[('gender', '=',  'male')]" />
                     <filter name="female_filter" string="Female" domain="[('gender', '=',  'female')]" />
                 </group>
@@ -80,9 +84,9 @@
     <record id="teachers_action" model="ir.actions.act_window">
         <field name="name">teachers</field>
         <field name="res_model">teachers</field>
-        <field name="view_mode">tree,form</field>
-        <!-- <field name="domain">[]</field>
-        <field name="context">{}</field> -->
+        <field name="view_mode">tree,form,search</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
         <!-- <field name="help" type="html">
             
         </field> -->

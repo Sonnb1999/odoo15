@@ -1,3 +1,4 @@
+from email.policy import default
 import re
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
@@ -19,13 +20,23 @@ class teachers(models.Model):
         ('male', 'Male'),
         ('female', 'Female')
     ], string='Gender', default='male')
+    active_email = fields.Boolean(string='Active email')
+    active = fields.Boolean(string='Active',default=True)
 
     teacher_country = fields.Many2one(
-        comodel_name='res.country', string='country', store=True,default= 241)
+        comodel_name='res.country', string='country', store=True, default=241)
     teacher_state = fields.Many2one(
         'res.country.state', string="State", store=True)
 
     class_id = fields.Many2one(comodel_name='classes', string='class name')
+
+    user_id = fields.Many2one(comodel_name='res.users', string='user')
+
+    @api.onchange('user_id')
+    def changeUser(self):
+        for record in self:
+            record.email = record.user_id.email
+        # return res
 
     @api.onchange('teacher_country')
     def set_values_to(self):

@@ -18,6 +18,7 @@ class plans(models.Model):
     _description = 'plan list'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _rec_name = 'plan_name'
+    
 
     plan_name = fields.Char(string='Plan name', required=True)
     course_id = fields.Many2one(
@@ -34,11 +35,9 @@ class plans(models.Model):
     start_time = fields.Date(string='Start time', required=True)
     end_time = fields.Date(string='End time', required=True)
 
-    instructors_count = fields.Char('count', compute='i_count')
-
-    def i_count(self):
-        pass
-
+    list_instructor = fields.One2many(
+        related='course_id.instructor_ids', string='list instructor')
+    email = fields.Char(string='email',store=False)
     _sql_constraints = [
         ('plan_name', 'UNIQUE (plan_name)', 'The plan name already exists')]
     # _sql_constraints = [
@@ -62,6 +61,9 @@ class plans(models.Model):
                     raise ValidationError('the end time is not suitable')
 
     # auto send_mail
+
+    def getEmail(self):
+        pass
 
     def sendMail(self):
         pass

@@ -48,6 +48,7 @@ class HrEmployeeBase(models.AbstractModel):
         ('to_define', 'To Define')], compute='_compute_presence_state', default='to_define')
     last_activity = fields.Date(compute="_compute_last_activity")
     last_activity_time = fields.Char(compute="_compute_last_activity")
+    
     hr_icon_display = fields.Selection([
         ('presence_present', 'Present'),
         ('presence_absent_active', 'Present but not active'),
