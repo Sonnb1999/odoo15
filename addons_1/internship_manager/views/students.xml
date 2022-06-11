@@ -10,8 +10,9 @@
                 <field name="student_code" />
                 <field name="gender" />
                 <field name="birthday" />
-                <field name="phone_number" widget="phone" />
                 <field name="address" />
+                <field name="phone_number" />
+                <field name="email" />
                 <field name="class_id" />
                 <field name="course_id" />
             </tree>
@@ -52,14 +53,17 @@
                                             <field name="birthday" />
                                         </strong>
                                     </li>
-                                    <!-- <li class="badge badge-pill float-right mb4" t-if="record.lang.raw_value"><field name="lang"/></li> -->
-                                    <!-- <li class="mb4" t-if="record.login.raw_value" title="Login"><i class="fa fa-envelope" role="img" aria-label="Login"/> <field name="login"/></li> -->
+                                    <li>
+                                        <strong>
+                                            <field name='email' widget="email" />
+                                        </strong>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
                     </t>
                 </templates>
-            
+
             </kanban>
         </field>
     </record>
@@ -83,6 +87,7 @@
                                 <field name="gender" />
                                 <field name="birthday" />
                                 <field name="phone_number" widget="phone" />
+                                <field name='email' widget="email" />
                                 <field name="address" />
                             </group>
                         </page>

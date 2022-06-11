@@ -15,6 +15,7 @@ class students(models.Model):
     birthday = fields.Date(string='birthday')
     phone_number = fields.Char(string='phone number')
     address = fields.Char(string='address')
+    email = fields.Char(string='email', required=True)
     gender = fields.Selection([
             ('male', 'Male'),
             ('female', 'Female')
@@ -29,6 +30,10 @@ class students(models.Model):
         ('student_code', 'UNIQUE (student_code)', 'student already exists')]
 
 
+    @api.onchange('user_id')
+    def changeUser(self):
+        for record in self:
+            record.email = record.user_id.email
 
     @api.constrains('phone_number')
     def validate_number(self):

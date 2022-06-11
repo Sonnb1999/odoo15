@@ -7,14 +7,14 @@
         <field name="arch" type="xml">
             <tree string="">
                 <field name="teacher_name" />
-                <field name="user_id" widget="many2one_avatar_user"/>
+                <field name="user_id" widget="many2one_avatar_user" />
                 <field name="birthday" />
                 <field name="gender" />
                 <field name="address" />
                 <field name="teacher_country" />
                 <field name="teacher_state" />
-                <field name='email' widget="email" />
-                <field name="phone_number" widget="phone" />
+                <field name='email' />
+                <field name="phone_number" />
 
             </tree>
         </field>
@@ -29,8 +29,8 @@
                     <group>
                         <field name="teacher_name" />
                         <field name="class_id" />
-                        <field name="user_id" widget="many2one_avatar"/>
-                        <field name="active"/>
+                        <field name="user_id" widget="many2one_avatar" />
+                        <field name="active" />
                     </group>
                     <notebook>
                         <page string="information">
@@ -48,7 +48,7 @@
                         <page string="security">
                             <group>
                                 <field name='email' />
-                                <field name="password" password="True" />
+                                <!-- <field name="password" password="True" /> -->
                             </group>
                         </page>
                     </notebook>
@@ -68,7 +68,7 @@
 
                 <group expand='0' string='Filters'>
                     <separator />
-                    <filter name="active_filter" string='active is false'  domain="[('active', '=',  False)]" />
+                    <filter name="active_filter" string='active is false' domain="[('active', '=',  False)]" />
                     <filter name="male_filter" string="Male" domain="[('gender', '=',  'male')]" />
                     <filter name="female_filter" string="Female" domain="[('gender', '=',  'female')]" />
                 </group>
