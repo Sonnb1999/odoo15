@@ -40,7 +40,7 @@
                                 <field name="phone_number" widget="phone" />
                                 <field name="address" />
                                 <field name="teacher_country" />
-                                <field name="teacher_state" domain="" />
+                                <field name="teacher_state"/>
 
                             </group>
                         </page>

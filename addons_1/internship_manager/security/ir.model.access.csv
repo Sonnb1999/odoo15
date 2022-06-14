@@ -3,7 +3,8 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_students,access.students,model_students,internship_manager.group_student_manager,1,1,1,1
 access_courses,access.courses,model_courses,internship_manager.group_course_manager,1,1,1,1
 access_classes,access.classes,model_classes,internship_manager.group_class_manager,1,1,1,1
-access_teachers,access.teachers,model_teachers,internship_manager.group_student_manager,1,1,1,1
+access_teachers,access.teachers,model_teachers,internship_manager.group_teacher_manager,1,1,1,1
+access_res_intern_users,access.res.intern.users,model_res_intern_users,internship_manager.group_student_manager,1,1,1,1
 
 access_plans,access.plans,model_plans,internship_manager.group_plan_manager,1,1,1,1
 access_instructors,access.instructors,model_instructors,internship_manager.group_instructor_manager,1,1,1,1

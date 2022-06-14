@@ -8,7 +8,7 @@ class students(models.Model):
     _name = 'students'
     _description = 'student list'
     _rec_name = 'student_name'
-
+    
     student_name = fields.Char(string='student name', required=True)
     student_image = fields.Binary(string='student image')
     student_code = fields.Char(string='student code', required=True)
@@ -16,10 +16,13 @@ class students(models.Model):
     phone_number = fields.Char(string='phone number')
     address = fields.Char(string='address')
     email = fields.Char(string='email', required=True)
+
     gender = fields.Selection([
-            ('male', 'Male'),
-            ('female', 'Female')
-        ], string='Gender', default='male')
+        ('male', 'Male'),
+        ('female', 'Female')
+    ], string='Gender', default='male')
+    instructor_id = fields.One2many(
+        'instructors', 'student_id', 'instructor list')
 
     class_id = fields.Many2one(
         comodel_name='classes', string='class name', required=True)
@@ -28,7 +31,6 @@ class students(models.Model):
 
     _sql_constraints = [
         ('student_code', 'UNIQUE (student_code)', 'student already exists')]
-
 
     @api.onchange('user_id')
     def changeUser(self):
@@ -45,5 +47,3 @@ class students(models.Model):
                     raise ValidationError('the phone number is wrong')
                 else:
                     pass
-
-   

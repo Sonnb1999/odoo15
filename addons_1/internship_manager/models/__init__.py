@@ -1,3 +1,4 @@
+from . import res_intern_users
 from . import students
 from . import courses
 from . import classes
@@ -6,3 +7,4 @@ from . import plans
 from . import instructors
 from . import councils
 from . import partners
+from . import inherit_demo

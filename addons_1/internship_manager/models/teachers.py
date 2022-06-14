@@ -1,6 +1,6 @@
 from email.policy import default
 import re
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 
 
@@ -8,6 +8,7 @@ class teachers(models.Model):
     _name = 'teachers'
     _description = 'teacher list'
     _rec_name = 'teacher_name'
+    # _inherit = 'res.users'
 
     teacher_name = fields.Char(string='teacher name', required=True)
     teacher_image = fields.Binary(string='teacher image')
@@ -21,10 +22,11 @@ class teachers(models.Model):
         ('female', 'Female')
     ], string='Gender', default='male')
     active_email = fields.Boolean(string='Active email')
-    active = fields.Boolean(string='Active',default=True)
+    active = fields.Boolean(string='Active', default=True)
 
     teacher_country = fields.Many2one(
         comodel_name='res.country', string='country', store=True, default=241)
+
     teacher_state = fields.Many2one(
         'res.country.state', string="State", store=True)
 
@@ -32,11 +34,23 @@ class teachers(models.Model):
 
     user_id = fields.Many2one(comodel_name='res.users', string='user')
 
+    @api.constrains('user_id')
+    def count_users(self):
+        if self.user_id:
+            for record in self:
+                pass
+
     @api.onchange('user_id')
     def changeUser(self):
-        for record in self:
-            record.email = record.user_id.email
-        # return res
+        if self.user_id:
+            for record in self:
+                record.email = record.user_id.email
+                record.teacher_name = record.user_id.name
+                count_user_def = record.search_count(
+                    [('user_id', '=', record.user_id.id)])
+                if count_user_def > 0:
+                    raise ValidationError(_("Teachers already exist"))
+            # return res
 
     @api.onchange('teacher_country')
     def set_values_to(self):
@@ -63,7 +77,7 @@ class teachers(models.Model):
         if vals.get('user_id', False):
             user_id = self.env['res.users'].browse(vals.get('user_id', False))
             # vals.update(
-            #     {'teacher_id': user_id.teacher_id and user_id.teacher_id.id or False})
+            #     {'user_id': user_id.user_id and user_id.user_id.id or False})
         return super(teachers, self).create(vals)
 
     # @api.constrains('student_name')

@@ -15,6 +15,7 @@
                 <field name="email" />
                 <field name="class_id" />
                 <field name="course_id" />
+                <field name="instructor_id" />
             </tree>
         </field>
     </record>
