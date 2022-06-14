@@ -18,6 +18,7 @@
         # 'data/partners.tag.csv',
         # 'data/cron.xml',
         'wizards/batch_update_student.xml',
+        'wizards/batch_update_teacher.xml',
         'views/menu.xml',
         'views/courses.xml',
         'views/partners.xml',

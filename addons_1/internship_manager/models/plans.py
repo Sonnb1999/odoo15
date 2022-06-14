@@ -22,7 +22,7 @@ class plans(models.Model):
 
     plan_name = fields.Char(string='Plan name', required=True)
     course_id = fields.Many2one(
-        comodel_name='courses', string='Course name', required=True)
+        comodel_name='courses', string='Course name', required=True, domain="[('active_course','!=','finished')]")
 
     course_start_time = fields.Date(
         related='course_id.start_time', string='Course start time', store=True)

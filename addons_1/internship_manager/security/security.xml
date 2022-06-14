@@ -11,8 +11,8 @@
         <field name="category_id" ref="internship_manager.internship_access" />
     </record>
 
-     <!-- create a group -->
-     <record id="group_teacher_manager" model="res.groups">
+    <!-- create a group -->
+    <record id="group_teacher_manager" model="res.groups">
         <field name="name">teachers </field>
         <!-- the name of module.id -->
         <field name="category_id" ref="internship_manager.internship_access" />
@@ -27,7 +27,7 @@
 
     <!-- create a group -->
     <record id="group_class_manager" model="res.groups">
-        <field name="name">classs </field>
+        <field name="name" >clases </field>
         <!-- the name of module.id -->
         <field name="category_id" ref="internship_manager.internship_access" />
     </record>
@@ -69,10 +69,10 @@
         <field name="domain_force">[('user_id', '=', user.id)]</field>
         <!-- <field name="groups" eval="[(4, ref('internship_manager.group_instructor_manager'))]" /> -->
         <!-- Not do yet -->
-        <field name="perm_read" eval="True"/>
-        <field name="perm_create" eval="False"/>
-        <field name="perm_write" eval="True"/>
-        <field name="perm_unlink" eval="False"/>
+        <field name="perm_read" eval="True" />
+        <field name="perm_create" eval="False" />
+        <field name="perm_write" eval="True" />
+        <field name="perm_unlink" eval="False" />
     </record>
 
 </odoo>

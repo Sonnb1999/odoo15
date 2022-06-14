@@ -10,4 +10,7 @@ access_plans,access.plans,model_plans,internship_manager.group_plan_manager,1,1,
 access_instructors,access.instructors,model_instructors,internship_manager.group_instructor_manager,1,1,1,1
 access_councils,access.councils,model_councils,internship_manager.group_council_manager,1,1,1,1
 access_partners,access.partners,model_partners,internship_manager.group_partner_manager,1,1,1,1
+
+
 access_students_batchupdate_wizard,access.students_batchupdate_wizard,model_students_batchupdate_wizard,base.group_user,1,1,1,1
+access_teachers_batchupdate_wizard,access.teachers_batchupdate_wizard,model_teachers_batchupdate_wizard,base.group_user,1,1,1,1

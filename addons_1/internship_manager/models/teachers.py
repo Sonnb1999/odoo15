@@ -30,8 +30,6 @@ class teachers(models.Model):
     teacher_state = fields.Many2one(
         'res.country.state', string="State", store=True)
 
-    class_id = fields.Many2one(comodel_name='classes', string='class name')
-
     user_id = fields.Many2one(comodel_name='res.users', string='user')
 
     @api.constrains('user_id')

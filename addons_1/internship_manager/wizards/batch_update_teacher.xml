@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_teacher_batch_update" model="ir.ui.view">
+        <field name="name">teachers.batchupdate.wizard.view.form</field>
+        <field name="model">teachers.batchupdate.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Batch Update">
+                <group>
+                    <group>
+                        <field name="gender" />
+                        <field name="address" />
+                        <field name="teacher_country" />
+                        <field name="teacher_state" />
+                        <field name="teacher_image" widget='image' />
+                    </group>
+                    <group />
+                </group>
+                <p>
+                    Apply updating on the selected record(s)?
+                </p>
+                <footer>
+                    <button string="Confirm" name="multi_update" type="object" default_focus="1" class="btn-primary" />
+                    <button string="Cancel" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_teacher_batch_update" model="ir.actions.act_window">
+        <field name="name">Batch Update</field>
+        <field name="res_model">teachers.batchupdate.wizard</field>
+        <field name="binding_model_id" ref="model_teachers" />
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="view_teacher_batch_update" />
+    </record>
+</odoo>
