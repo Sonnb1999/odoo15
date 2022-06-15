@@ -130,5 +130,6 @@
         </field> -->
     </record>
 
-    <menuitem id="teacher_sub" name="teacher List" action="teachers_action" parent="class_management" sequence="10" />
+    <menuitem id="teacher_sub" name="Teacher List" action="teachers_action" parent="class_management" sequence="10" group=""/>
+
 </odoo>

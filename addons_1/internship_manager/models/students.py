@@ -1,3 +1,4 @@
+from email.policy import default
 from signal import raise_signal
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
@@ -8,7 +9,7 @@ class students(models.Model):
     _name = 'students'
     _description = 'student list'
     _rec_name = 'student_name'
-    
+
     student_name = fields.Char(string='student name', required=True)
     student_image = fields.Binary(string='student image')
     student_code = fields.Char(string='student code', required=True)
@@ -16,6 +17,8 @@ class students(models.Model):
     phone_number = fields.Char(string='phone number')
     address = fields.Char(string='address')
     email = fields.Char(string='email', required=True)
+    condition = fields.Selection(
+        [('qualified', 'Qualified'), ('not_qualified_yet', 'Not qualified yet')], string='Condition', default='qualified')
 
     gender = fields.Selection([
         ('male', 'Male'),
