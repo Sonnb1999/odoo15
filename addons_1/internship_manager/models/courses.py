@@ -85,7 +85,7 @@ class courses(models.Model):
 
     @api.model
     def create(self, vals):
-        print('odoo create course >>>>>', vals)
+        # print('odoo create course >>>>>', vals)
         # vals['type_of_internship'] = ''
         return super(courses, self).create(vals)
 

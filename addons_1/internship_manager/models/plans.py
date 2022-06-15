@@ -2,6 +2,8 @@ import datetime
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
+from datetime import timedelta
+
 Send_mail = [('Haven\'t sent mail yet', 'Haven\'t sent mail yet'),
              ('Sent the first notification email',
               'Sent the first notification email'),
@@ -18,7 +20,6 @@ class plans(models.Model):
     _description = 'plan list'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _rec_name = 'plan_name'
-    
 
     plan_name = fields.Char(string='Plan name', required=True)
     course_id = fields.Many2one(
@@ -37,7 +38,7 @@ class plans(models.Model):
 
     list_instructor = fields.One2many(
         related='course_id.instructor_ids', string='list instructor')
-    email = fields.Char(string='email',store=False)
+    email = fields.Char(string='email', store=False)
     _sql_constraints = [
         ('plan_name', 'UNIQUE (plan_name)', 'The plan name already exists')]
     # _sql_constraints = [
@@ -61,6 +62,19 @@ class plans(models.Model):
                     raise ValidationError('the end time is not suitable')
 
     # auto send_mail
+
+    @api.onchange('course_id', 'start_time')
+    def change_course(self):
+        ids = self.env['plans'].search_count(
+            [('course_id', '=', self.course_id.id)])
+        if self.course_id:
+            if ids < 1:
+                for record in self:
+                    record.start_time = record.course_start_time
+                    _start = record.start_time
+                    # print('type', type(_start))
+                    if record.start_time:
+                        record.end_time =  record.start_time + timedelta(days=7)
 
     def getEmail(self):
         pass
