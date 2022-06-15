@@ -77,7 +77,8 @@
         <field name="name">courses.view.kanban</field>
         <field name="model">courses</field>
         <field name="arch" type="xml">
-            <kanban>
+            <!-- default_group_by = "active_course" -->
+            <kanban >
                 <field name="active_course" />
                 <templates>
                     <t t-name="kanban-box">
