@@ -5,7 +5,7 @@
         <field name="name">courses.view.tree</field>
         <field name="model">courses</field>
         <field name="arch" type="xml">
-            <tree string="">
+            <tree string="" multi_edit="1">
                 <field name="course_name" optional="show" />
                 <field name="educational_system" optional="show" />
                 <field name="type_of_internship" optional="show" decoration-success="type_of_internship == 'professional_practice'" decoration-info="type_of_internship == 'internship'" decoration-warning="type_of_internship == 'graduation_thesis'" widget="badge" />
@@ -14,7 +14,7 @@
                 <field name='student_ids' optional="show" />
                 <field name='instructor_ids' optional="show" />
                 <field name="activity_ids" widget="list_activity" optional="show" />
-                <field name="tag_partners" widget="many2many_tags" options="{'color_field':'color'}"/>
+                <field name="tag_partners" widget="many2many_tags" options="{'color_field':'color'}" />
             </tree>
         </field>
     </record>
@@ -78,7 +78,7 @@
         <field name="model">courses</field>
         <field name="arch" type="xml">
             <!-- default_group_by = "active_course" -->
-            <kanban >
+            <kanban>
                 <field name="active_course" />
                 <templates>
                     <t t-name="kanban-box">

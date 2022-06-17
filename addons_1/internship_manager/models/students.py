@@ -35,6 +35,22 @@ class students(models.Model):
     _sql_constraints = [
         ('student_code', 'UNIQUE (student_code)', 'student already exists')]
 
+    student_country = fields.Many2one(
+        comodel_name='res.country', string='country', store=True, default=241)
+
+    student_state = fields.Many2one(
+        'res.country.state', string="State", store=True)
+
+    @api.onchange('student_country')
+    def change_country(self):
+        ids = self.env['res.country.state'].search(
+            [(
+                "country_id", "=", self.student_country.id
+            )])
+        return {
+            "domain": {"student_state": [('id', 'in', ids.ids)]},
+        }
+
     @api.onchange('user_id')
     def changeUser(self):
         for record in self:

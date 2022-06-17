@@ -11,8 +11,8 @@ Send_mail = [('Haven\'t sent mail yet', 'Haven\'t sent mail yet'),
               'Emailed the final notification')
              ]
 
-Type_list = [('Submit a Report', 'Submit a Report'), (
-    'Edit topic', 'Edit topic'), ('No announcement yet', 'No announcement yet')]
+Type_list = [('submit_a_report', 'Submit a Report'), (
+    'edit_topic', 'Edit topic'), ('no_announcement_yet', 'No announcement yet')]
 
 
 class plans(models.Model):
@@ -63,7 +63,7 @@ class plans(models.Model):
 
     # auto send_mail
 
-    @api.onchange('course_id', 'start_time')
+    @api.onchange('course_id', 'start_time', 'type')
     def change_course(self):
         ids = self.env['plans'].search_count(
             [('course_id', '=', self.course_id.id)])
@@ -71,10 +71,11 @@ class plans(models.Model):
             if ids < 1:
                 for record in self:
                     record.start_time = record.course_start_time
-                    _start = record.start_time
-                    # print('type', type(_start))
                     if record.start_time:
-                        record.end_time =  record.start_time + timedelta(days=7)
+                        record.end_time = record.start_time + \
+                            timedelta(days=7)
+                    if record.type == "submit_a_report":
+                        pass
 
     def getEmail(self):
         pass

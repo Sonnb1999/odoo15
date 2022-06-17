@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_course_batch_update" model="ir.ui.view">
+        <field name="name">view.course.batch.update</field>
+        <field name="model">courses.batchupdate.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Batch Update">
+                <group>
+                    <group>
+                        <field name="educational_system" />
+                        <field name="type_of_internship" />
+                        <field name="active_course" />
+                    </group>
+                    <group />
+                </group>
+                <p>
+                    Apply updating on the selected record(s)?
+                </p>
+                <footer>
+                    <button string="Confirm" name="multi_update" type="object" default_focus="1" class="btn-primary" />
+                    <button string="Cancel" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_course_batch_update" model="ir.actions.act_window">
+        <field name="name">Batch Update</field>
+        <field name="res_model">courses.batchupdate.wizard</field>
+        <field name="binding_model_id" ref="model_courses" />
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="view_course_batch_update" />
+    </record>
+</odoo>

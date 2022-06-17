@@ -14,3 +14,4 @@ access_partners,access.partners,model_partners,internship_manager.group_partner_
 
 access_students_batchupdate_wizard,access.students_batchupdate_wizard,model_students_batchupdate_wizard,base.group_user,1,1,1,1
 access_teachers_batchupdate_wizard,access.teachers_batchupdate_wizard,model_teachers_batchupdate_wizard,base.group_user,1,1,1,1
+access_courses_batchupdate_wizard,access.courses_batchupdate_wizard,model_courses_batchupdate_wizard,base.group_user,1,1,1,1

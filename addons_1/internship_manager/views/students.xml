@@ -11,12 +11,14 @@
                 <field name="gender" />
                 <field name="birthday" />
                 <field name="address" />
+                <field name="student_country" />
+                <field name="student_state" />
                 <field name="phone_number" />
                 <field name="email" />
                 <field name="class_id" />
                 <field name="course_id" />
                 <!-- <field name="instructor_id" /> -->
-                
+
             </tree>
         </field>
     </record>
@@ -91,6 +93,8 @@
                                 <field name="phone_number" widget="phone" />
                                 <field name='email' widget="email" />
                                 <field name="address" />
+                                <field name="student_country" />
+                                <field name="student_state" />
                             </group>
                         </page>
                     </notebook>
