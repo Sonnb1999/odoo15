@@ -10,6 +10,8 @@
                         <field name="class_id" />
                         <field name="gender" />
                         <field name="address" />
+                        <field name="student_country" />
+                        <field name="student_state" />
                         <field name="student_image" widget='image' />
                     </group>
                     <group />

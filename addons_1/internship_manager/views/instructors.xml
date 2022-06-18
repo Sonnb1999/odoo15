@@ -5,7 +5,7 @@
         <field name="name">instructors.view.tree</field>
         <field name="model">instructors</field>
         <field name="arch" type="xml">
-            <tree string="" sample="1" editable="top">
+            <tree string="" sample="1" multi_edit="1">
                 <field name="student_id" />
                 <field name="student_code" />
                 <field name="birthday" />
