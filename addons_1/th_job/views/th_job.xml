@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="th_job_test_view_tree" model="ir.ui.view">
+        <field name="name">th.job.test.view.tree</field>
+        <field name="model">th.job.test</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="th_mission" />
+                <field name="th_start_time" />
+                <field name="th_end_time" />
+                <field name="th_status" />
+                <field name="th_description" />
+                <field name="th_worker" />
+                <field name="th_note" />
+                <field name="create_uid" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="th_job_test_view_form" model="ir.ui.view">
+        <field name="name">th.job.test.view.form</field>
+        <field name="model">th.job.test</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="th_mission" />
+                            <field name="th_start_time" />
+                            <field name="th_end_time" />
+
+                        </group>
+                        <group>
+                            <field name="th_status" />
+                            <field name="th_description" />
+                            <field name="th_worker" />
+                        </group>
+
+                    </group>
+                    <notebook>
+                        <page name="note" string="string">
+                            <group>
+                                <field name="th_note" />
+                                <field name="create_uid" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="th_job_action" model="ir.actions.act_window">
+        <field name="name">Mission</field>
+        <field name="res_model">th.job.test</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <!-- <field name="help" type="html"></field> -->
+    </record>
+
+    <menuitem id="th_job_sub" name="Job" action="th_job_action" parent="th_job_root" sequence="2" />
+
+</odoo>

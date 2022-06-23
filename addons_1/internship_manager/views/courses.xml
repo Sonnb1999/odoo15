@@ -15,6 +15,7 @@
                 <field name='instructor_ids' optional="show" />
                 <field name="activity_ids" widget="list_activity" optional="show" />
                 <field name="tag_partners" widget="many2many_tags" options="{'color_field':'color'}" />
+                <field name="plan_id"/>
             </tree>
         </field>
     </record>
@@ -52,6 +53,10 @@
                         </page>
                         <page string="student list">
                             <field name='student_ids' readonly="1" />
+
+                        </page>
+                        <page string="plan list">
+                            <field name="plan_id"/>
                         </page>
                         <page string="instructor list">
                             <field name='instructor_ids' readonly="1" widget='one2many'>

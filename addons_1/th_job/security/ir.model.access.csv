@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_ht_job_admin,access.ht_job.admin,model_ht_job_test,base.group_user,1,1,1,1

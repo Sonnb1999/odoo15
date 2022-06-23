@@ -5,6 +5,13 @@
     </record>
 
     <!-- create a group -->
+    <record id="group_admin_manager" model="res.groups">
+        <field name="name">admins </field>
+        <!-- the name of module.id -->
+        <field name="category_id" ref="internship_manager.internship_access" />
+    </record>
+
+    <!-- create a group -->
     <record id="group_student_manager" model="res.groups">
         <field name="name">students </field>
         <!-- the name of module.id -->
@@ -25,12 +32,9 @@
         <field name="category_id" ref="internship_manager.internship_access" />
     </record>
 
-
-
-
     <!-- create a group -->
     <record id="group_class_manager" model="res.groups">
-        <field name="name" >clases </field>
+        <field name="name">clases </field>
         <!-- the name of module.id -->
         <field name="category_id" ref="internship_manager.internship_access" />
     </record>
@@ -67,16 +71,51 @@
 
     <!-- rule security  -->
     <!-- rule se van thêm sửa xóa các giá trị  trong cho phép -->
+    <!-- <record id="instructor_rule" model="ir.rule">
+        <field name="name">instructor admin</field>
+        <field name="model_id" ref="model_instructors" />
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[
+            (4, ref('internship_manager.group_teacher_manager'))
+            (4, ref('internship_manager.group_teacher_manager'))
+            (4, ref('internship_manager.group_teacher_manager'))
+            (4, ref('internship_manager.group_teacher_manager'))
+            (4, ref('internship_manager.group_teacher_manager'))
+        ]" />
+        <field name="perm_read" eval="True" />
+        <field name="perm_create" eval="True" />
+        <field name="perm_write" eval="True" />
+        <field name="perm_unlink" eval="True" />
+    </record> -->
+
+
+    <!-- rule security  -->
+    <!-- rule se van thêm sửa xóa các giá trị  trong cho phép -->
+
+
+    <!-- rule security  -->
+    <!-- rule se van thêm sửa xóa các giá trị  trong cho phép -->
+    <!-- có thể sẽ phải làm bằng tay đoạn này thêm 1 trường active thì chắc được -->
     <record id="instructor_rule" model="ir.rule">
         <field name="name">instructor rule</field>
         <field name="model_id" ref="model_instructors" />
-        <field name="domain_force">['|',('user_id', '=', user.id),(0, '=', 1)]</field>
+        <field name="domain_force">[("plan_id.type","=","edit_topic")]</field>
         <field name="groups" eval="[(4, ref('internship_manager.group_teacher_manager'))]" />
         <!-- Not do yet if it true : không được làm nếu nó True-->
-        <field name="perm_read" eval="True" />
+        <field name="perm_read" eval="False" />
         <field name="perm_create" eval="True" />
         <field name="perm_write" eval="True" />
         <field name="perm_unlink" eval="True" />
     </record>
 
+    <record id="instructor_rule_teacher_id" model="ir.rule">
+        <field name="name">instructor rule</field>
+        <field name="model_id" ref="model_instructors" />
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('internship_manager.group_teacher_manager'))]" />
+        <field name="perm_read" eval="True" />
+        <field name="perm_create" eval="False" />
+        <field name="perm_write" eval="False" />
+        <field name="perm_unlink" eval="False" />
+    </record>
 </odoo>

@@ -8,12 +8,14 @@
             <tree string="" sample="1" multi_edit="1">
                 <field name="student_id" />
                 <field name="student_code" />
+                <field name="activ_i" />
                 <field name="birthday" />
                 <field name="class_id" />
                 <field name="teacher_id" />
                 <field name="user_id" />
                 <field name="email" />
                 <field name="phone_number" />
+                <field name="plan_id" />
                 <!-- <field name="count_student" /> -->
             </tree>
         </field>
@@ -38,6 +40,7 @@
                 <field name="student_id" />
                 <field name="course_id" />
                 <field name="class_id" />
+
 
                 <group expand='0' string='Group by...'>
                     <filter string='Class list' name="class_group" context="{'group_by': 'class_id'}" />
@@ -99,8 +102,9 @@
             <form string="">
                 <sheet>
                     <group>
-                        <field name="student_id"/>
+                        <field name="student_id" />
                         <field name="student_code" />
+                        <field name="activ_i" />
                         <field name="birthday" />
                         <field name="class_id" />
                         <field name="course_id" />
@@ -110,6 +114,7 @@
                         <field name="student_count" />
                         <field name="email" widget='email' />
                         <field name="phone_number" widget='phone' />
+                        <field name="plan_id" />
                     </group>
                 </sheet>
             </form>

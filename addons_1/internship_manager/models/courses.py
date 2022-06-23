@@ -27,6 +27,8 @@ class courses(models.Model):
     instructor_ids = fields.One2many(
         'instructors', 'course_id', string='instructors', tracking=True)
 
+    plan_id = fields.One2many('plans','course_id',string="plans",tracking=True)
+
     active_course = fields.Selection([
         ('not_started_yet', 'not started yet'),
         ('started', 'started'),
