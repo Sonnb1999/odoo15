@@ -22,24 +22,34 @@
         <field name="name">th.job.test.view.form</field>
         <field name="model">th.job.test</field>
         <field name="arch" type="xml">
+
             <form string="">
+                <header>
+                    <field name="th_status" widget="statusbar" statusbar_visible="new,in_progress,done,solved,cancelled" nolabel="1" clickable="1" />
+                </header>
                 <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="th_mission" class="field_name" placeholder="Subject..." />
+                        </h1>
+                    </div>
+
                     <group>
                         <group>
-                            <field name="th_mission" />
+
+                            <!-- widget="daterange" options="{'Related_start_date':'th_start_time'}" -->
                             <field name="th_start_time" />
                             <field name="th_end_time" />
 
                         </group>
                         <group>
-                            <field name="th_status" />
                             <field name="th_description" />
                             <field name="th_worker" />
                         </group>
 
                     </group>
                     <notebook>
-                        <page name="note" string="string">
+                        <page name="note" string="Note">
                             <group>
                                 <field name="th_note" />
                                 <field name="create_uid" />
@@ -47,18 +57,78 @@
                         </page>
                     </notebook>
                 </sheet>
+                <!-- Chatter -->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user" />
+                    <field name="message_ids" />
+                    <field name="activity_ids" widget="mail_activity"></field>
+                </div>
             </form>
+        </field>
+    </record>
+
+    <record id="th_job_test_view_kanban" model="ir.ui.view">
+        <field name="name">th.job.test.view.kanban</field>
+        <field name="model">th.job.test</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_small_column" default_order="th_status">
+                <field name="th_status" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <ul>
+                                    <li class="mb4">
+                                        <strong>
+                                            <field name="th_mission" />
+                                        </strong>
+                                    </li>
+                                    <li>
+                                        <strong>
+                                            <field name="th_start_time" />
+                                        </strong>
+                                    </li>
+                                    <li>
+                                        <strong>
+                                            <field name="th_end_time" />
+                                        </strong>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <record id="th_job_test_view_search" model="ir.ui.view">
+        <field name="name">th.job.test.view.search</field>
+        <field name="model">th.job.test</field>
+        <field name="arch" type="xml">
+            <search string="">
+                <field name="th_status" />
+                <filter string="Running" name="running" domain="[('th_status', '=', 'in_progress')]"/>
+                <filter string="Not Running" name="not_running" domain="[('th_status', '!=', 'in_progress')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Status" name="th_status_search" domain="[]" context="{'group_by': 'th_status'}"/>
+                </group>
+            </search>
         </field>
     </record>
 
     <record id="th_job_action" model="ir.actions.act_window">
         <field name="name">Mission</field>
         <field name="res_model">th.job.test</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">kanban,tree,form,search</field>
         <field name="domain">[]</field>
-        <field name="context">{}</field>
+        <field name="context">{'search_default_th_status_search': 1}</field>
+        <!-- <field name="context"></field> -->
         <!-- <field name="help" type="html"></field> -->
     </record>
+
+   
 
     <menuitem id="th_job_sub" name="Job" action="th_job_action" parent="th_job_root" sequence="2" />
 

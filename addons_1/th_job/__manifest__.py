@@ -12,8 +12,8 @@
     'depends': ['project', 'hr'],
     'demo': [],
     'data': [
-        # 'security/security.xml',
-        # 'security/ir.model.access.csv',
+        'security/security.xml',
+        'security/ir.model.access.csv',
         # 'data/partner_tag_data.xml',
         # 'data/partners.tag.csv',
         # 'data/cron.xml',

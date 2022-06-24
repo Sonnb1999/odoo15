@@ -28,7 +28,7 @@ class instructors(models.Model):
 
     birthday = fields.Date(related='student_id.birthday', string='birthday')
 
-    activ_i = fields.Boolean(string='activ_i')
+    active_i = fields.Boolean(string='active')
 
     class_id = fields.Many2one(
         related='student_id.class_id', string='class name', store=True)

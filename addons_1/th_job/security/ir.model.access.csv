@@ -1,3 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 
-access_ht_job_admin,access.ht_job.admin,model_ht_job_test,base.group_user,1,1,1,1
+access_th_job_admin,access.th_job.admin,model_th_job_test,th_job.group_admin_job_manager,1,1,1,1
+access_th_job,access.th_job,model_th_job_test,th_job.group_job_manager,1,1,1,1
