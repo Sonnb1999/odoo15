@@ -1,4 +1,5 @@
 from email.policy import default
+from operator import index
 from odoo import fields, api, models
 from odoo.exceptions import ValidationError
 import datetime
@@ -18,9 +19,10 @@ class th_job(models.Model):
     th_status = fields.Selection(
         [('new', 'New'), ('in_progress', 'In Progress'),
          ('solved', 'Solved'), ('done', 'Done'),
-         ('cancelled', 'Cancelled')], string="Status", required=True, tracking=True, default="new", group_expand='_expand_status')
-    th_note = fields.Text('Note', tracking=True)
+         ('cancelled', 'Cancelled')], string="Status", required=True, 
+         tracking=True, default="new", group_expand='_expand_status',index=True)
 
+    th_note = fields.Text('Note', tracking=True)
     th_worker = fields.Many2one(
         comodel_name='res.users', string='Worker', tracking=True)
 

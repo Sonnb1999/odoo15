@@ -71,7 +71,12 @@
         <field name="name">th.job.test.view.kanban</field>
         <field name="model">th.job.test</field>
         <field name="arch" type="xml">
-            <kanban class="o_kanban_small_column" default_order="th_status">
+            
+            <kanban default_order="th_status"
+            class="o_kanban_small_column o_kanban_project_tasks" group_delete="false"  
+            on_create="quick_create" quick_create_view="project.quick_create_task_form" 
+            archivable="false"  js_class="project_task_kanban" 
+            sample="1">
                 <field name="th_status" />
                 <templates>
                     <t t-name="kanban-box">
@@ -109,10 +114,10 @@
         <field name="arch" type="xml">
             <search string="">
                 <field name="th_status" />
-                <filter string="Running" name="running" domain="[('th_status', '=', 'in_progress')]"/>
-                <filter string="Not Running" name="not_running" domain="[('th_status', '!=', 'in_progress')]"/>
+                <!-- <filter string="Running" name="running" domain="[('th_status', '=', 'in_progress')]"/>
+                <filter string="Not Running" name="not_running" domain="[('th_status', '!=', 'in_progress')]"/> -->
                 <group expand="0" string="Group By">
-                    <filter string="Status" name="th_status_search" domain="[]" context="{'group_by': 'th_status'}"/>
+                    <filter string="Status" name="th_status_search" domain="[]" context="{'group_by': 'th_status'}" />
                 </group>
             </search>
         </field>
@@ -128,7 +133,6 @@
         <!-- <field name="help" type="html"></field> -->
     </record>
 
-   
 
     <menuitem id="th_job_sub" name="Job" action="th_job_action" parent="th_job_root" sequence="2" />
 
