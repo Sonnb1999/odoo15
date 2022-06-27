@@ -116,6 +116,15 @@
                         <field name="phone_number" widget='phone' />
                         <field name="plan_id" />
                     </group>
+                    <notebook>
+                        <page name="file" string="file">
+                            <group>
+                                <field name="file_register" filename="document_fname" widget="binary" />
+                                <field name="file_report" filename="document_fname" widget="binary" />
+                                <field name="file_outline" filename="document_fname" widget="binary" />
+                            </group>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>

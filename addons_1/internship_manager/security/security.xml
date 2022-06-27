@@ -101,11 +101,10 @@
         <field name="model_id" ref="model_instructors" />
         <field name="domain_force">[("plan_id.type","=","edit_topic")]</field>
         <field name="groups" eval="[(4, ref('internship_manager.group_teacher_manager'))]" />
-        <!-- Not do yet if it true : không được làm nếu nó True-->
         <field name="perm_read" eval="False" />
         <field name="perm_create" eval="True" />
         <field name="perm_write" eval="True" />
-        <field name="perm_unlink" eval="True" />
+        <field name="perm_unlink" eval="False" />
     </record>
 
     <record id="instructor_rule_teacher_id" model="ir.rule">

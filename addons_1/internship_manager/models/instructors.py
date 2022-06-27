@@ -1,4 +1,7 @@
 from email.policy import default
+from re import T
+
+from requests import delete
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 from . import students
@@ -48,6 +51,11 @@ class instructors(models.Model):
 
     user_id = fields.Many2one(related='teacher_id.user_id', string="user_id")
 
+    # file
+    file_register = fields.Binary(string="file register")
+    file_report = fields.Binary(string="file report")
+    file_outline = fields.Binary(string="file outline")
+
     _sql_constraints = [
         ('student_id', 'UNIQUE (student_id)', 'student already exists')]
 
@@ -57,7 +65,6 @@ class instructors(models.Model):
             # record.student_id.id same ['student_id','id']
             student_id = record.search_count(
                 [('student_id', '=', record.student_id.id)])
-            print(student_id)
             if student_id > 1:
                 raise ValidationError(_("Student already exists"))
 
@@ -82,3 +89,50 @@ class instructors(models.Model):
                     self.student_count = str(student_count_def)
         else:
             self.student_count = str(0)
+
+    @api.model
+    def create(self, vals_list):
+
+        use_in_group_teacher = self.env.user.has_group(
+            'internship_manager.group_teacher_manager')
+        if use_in_group_teacher == True:
+            raise ValidationError(
+                'Only user belongs to admin are allowed to ....')
+
+        return super().create(vals_list)
+
+    def write(self, vals):
+        use_in_group_teacher = self.env.user.has_group(
+            'internship_manager.group_teacher_manager')
+        if use_in_group_teacher == True:
+            for record in self:
+                if record.plan_id:
+                    if record.course_id == record.plan_id.course_id:
+                        if record.plan_id.type == "edit_topic":
+                            start_time = datetime.datetime.combine(
+                                record.plan_id.start_time, datetime.time(0, 0))
+                            end_time = datetime.datetime.combine(
+                                record.plan_id.end_time, datetime.time(0, 0))
+
+                            if start_time < datetime.datetime.now() and end_time > datetime.datetime.now():
+                                return super().write(vals)
+                            else:
+                                raise ValidationError(
+                                    "this time is not to update information1")
+                        else:
+                            raise ValidationError(
+                                "this time is not to update information2")
+                else:
+                    raise ValidationError(
+                        "This course is not scheduled to be updated")
+
+        else:
+            return super().write(vals)
+
+    def unlink(self):
+        use_in_group_teacher = self.env.user.has_group(
+            'internship_manager.group_teacher_manager')
+        if use_in_group_teacher == True:
+            raise ValidationError(
+                'Only user belongs to admin are allowed to delete')
+        return super().unlink()

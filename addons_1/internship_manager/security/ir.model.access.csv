@@ -1,27 +1,27 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 
 access_students_admin,access.students.admin,model_students,internship_manager.group_admin_manager,1,1,1,1
-access_students,access.students,model_students,internship_manager.group_student_manager,1,1,1,1
+access_students,access.students,model_students,internship_manager.group_student_manager,1,0,0,0
 
 access_courses_admin,access.courses.admin,model_courses,internship_manager.group_admin_manager,1,1,1,1
-access_courses,access.courses,model_courses,internship_manager.group_course_manager,1,1,1,1
+access_courses,access.courses,model_courses,internship_manager.group_course_manager,1,0,0,0
 
 access_classes_admin,access.classes.admin,model_classes,internship_manager.group_admin_manager,1,1,1,1
-access_classes,access.classes,model_classes,internship_manager.group_class_manager,1,1,1,1
+access_classes,access.classes,model_classes,internship_manager.group_class_manager,1,0,0,0
 
 access_teachers_admin,access.teachers.admin,model_teachers,internship_manager.group_admin_manager,1,1,1,1
-access_teachers,access.teachers,model_teachers,internship_manager.group_teacher_manager,1,1,1,1
+access_teachers,access.teachers,model_teachers,internship_manager.group_teacher_manager,1,0,0,0
 
 access_res_intern_users,access.res.intern.users,model_res_intern_users,internship_manager.group_student_manager,1,1,1,1
 
 access_plans_admin,access.plans.admin,model_plans,internship_manager.group_admin_manager,1,1,1,1
-access_plans,access.plans,model_plans,internship_manager.group_plan_manager,1,1,1,1
+access_plans,access.plans,model_plans,internship_manager.group_plan_manager,1,0,0,0
 
 access_instructors_admin,access.instructors.admin,model_instructors,internship_manager.group_admin_manager,1,1,1,1
-access_instructors_teacher,access.instructors.teacher,model_instructors,internship_manager.group_instructor_manager,1,1,1,1
+access_instructors_teacher,access.instructors.teacher,model_instructors,internship_manager.group_instructor_manager,1,1,0,0
 
 access_councils_admin,access.councils.admin,model_councils,internship_manager.group_admin_manager,1,1,1,1
-access_councils,access.councils,model_councils,internship_manager.group_council_manager,1,1,1,1
+access_councils,access.councils,model_councils,internship_manager.group_council_manager,1,0,0,0
 
 access_partners_admin,access.partners.admin,model_partners,internship_manager.group_admin_manager,1,1,1,1
 access_partners,access.partners,model_partners,internship_manager.group_partner_manager,1,1,1,1
