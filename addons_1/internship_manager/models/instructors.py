@@ -1,11 +1,12 @@
 from email.policy import default
 from re import T
 
-from requests import delete
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
-from . import students
 import datetime
+
+import mimetypes
+from odoo.tools.mimetypes import guess_mimetype
 
 
 class instructors(models.Model):
@@ -53,6 +54,8 @@ class instructors(models.Model):
 
     # file
     file_register = fields.Binary(string="file register")
+   
+
     file_report = fields.Binary(string="file report")
     file_outline = fields.Binary(string="file outline")
 
@@ -89,7 +92,7 @@ class instructors(models.Model):
                     self.student_count = str(student_count_def)
         else:
             self.student_count = str(0)
-
+    
     @api.model
     def create(self, vals_list):
 
@@ -98,9 +101,9 @@ class instructors(models.Model):
         if use_in_group_teacher == True:
             raise ValidationError(
                 'Only user belongs to admin are allowed to ....')
-
         return super().create(vals_list)
 
+    
     def write(self, vals):
         use_in_group_teacher = self.env.user.has_group(
             'internship_manager.group_teacher_manager')

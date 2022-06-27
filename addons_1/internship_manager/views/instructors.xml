@@ -119,9 +119,9 @@
                     <notebook>
                         <page name="file" string="file">
                             <group>
-                                <field name="file_register" filename="document_fname" widget="binary" />
-                                <field name="file_report" filename="document_fname" widget="binary" />
-                                <field name="file_outline" filename="document_fname" widget="binary" />
+                                <field name="file_register" filename="file_name" widget="binary" options="{'accepted_file_extensions': '.pdf,.svg'}" />
+                                <field name="file_report" filename="file_name" widget="binary" options="{'accepted_file_extensions': '.pdf,.svg'}" />
+                                <field name="file_outline" filename="file_name" widget="binary" options="{'accepted_file_extensions': '.pdf,.svg'}" />
                             </group>
                         </page>
                     </notebook>
