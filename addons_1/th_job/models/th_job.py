@@ -20,7 +20,7 @@ class th_job(models.Model):
         [('new', 'New'), ('in_progress', 'In Progress'),
          ('solved', 'Solved'), ('done', 'Done'),
          ('cancelled', 'Cancelled')], string="Status", required=True, 
-         tracking=True, default="new", group_expand='_expand_status',index=True)
+         tracking=True, default="new", group_expand='_expand_status')
 
     th_note = fields.Text('Note', tracking=True)
     th_worker = fields.Many2one(

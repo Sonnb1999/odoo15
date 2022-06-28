@@ -71,12 +71,8 @@
         <field name="name">th.job.test.view.kanban</field>
         <field name="model">th.job.test</field>
         <field name="arch" type="xml">
-            
-            <kanban default_order="th_status"
-            class="o_kanban_small_column o_kanban_project_tasks" group_delete="false"  
-            on_create="quick_create" quick_create_view="project.quick_create_task_form" 
-            archivable="false"  js_class="project_task_kanban" 
-            sample="1">
+            <!-- on_create="quick_create" quick_create_view="project.quick_create_task_form" archivable="false" js_class="project_task_kanban" -->
+            <kanban default_order="th_status" class="o_kanban_small_column o_kanban_project_tasks" sample="1">
                 <field name="th_status" />
                 <templates>
                     <t t-name="kanban-box">

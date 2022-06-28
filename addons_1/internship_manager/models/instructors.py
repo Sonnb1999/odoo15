@@ -115,7 +115,7 @@ class instructors(models.Model):
                             start_time = datetime.datetime.combine(
                                 record.plan_id.start_time, datetime.time(0, 0))
                             end_time = datetime.datetime.combine(
-                                record.plan_id.end_time, datetime.time(0, 0))
+                                record.plan_id.end_time, datetime.time(23, 59))
 
                             if start_time < datetime.datetime.now() and end_time > datetime.datetime.now():
                                 return super().write(vals)
@@ -128,14 +128,13 @@ class instructors(models.Model):
                 else:
                     raise ValidationError(
                         "This course is not scheduled to be updated")
-
         else:
             return super().write(vals)
 
-    def unlink(self):
-        use_in_group_teacher = self.env.user.has_group(
-            'internship_manager.group_teacher_manager')
-        if use_in_group_teacher == True:
-            raise ValidationError(
-                'Only user belongs to admin are allowed to delete')
-        return super().unlink()
+    # def unlink(self):
+    #     use_in_group_teacher = self.env.user.has_group(
+    #         'internship_manager.group_teacher_manager')
+    #     if use_in_group_teacher == True:
+    #         raise ValidationError(
+    #             'Only user belongs to admin are allowed to delete')
+    #     return super().unlink()
