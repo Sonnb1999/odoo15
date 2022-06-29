@@ -1,6 +1,7 @@
-from email.policy import default
 from odoo import fields, api, models
 import datetime
+
+from odoo.exceptions import ValidationError
 
 from datetime import timedelta
 
@@ -16,7 +17,8 @@ class estate_property(models.Model):
     date_availability = fields.Date(
         string="Availability form", copy=True, default=datetime.datetime.today() + timedelta(100))
     expected_price = fields.Float(string="Expected price", required=True)
-    selling_price = fields.Float(string="Selling price", readonly=True)
+    selling_price = fields.Float(
+        string="Selling price", readonly=True,)
     bedrooms = fields.Integer(string="Bedrooms", default=2)
     living_area = fields.Integer(string="Living area")
     facades = fields.Integer(string="Facades")
@@ -28,23 +30,22 @@ class estate_property(models.Model):
 
     active = fields.Boolean(string="Active", default=True)
     state = fields.Selection(
-        [('new', 'New'), ('old', 'Old')], string="Status")
+        [('new', 'New'), ('old', 'Old'), ('sold', 'Sold'), ('cancel', 'Cancel')], string="Status", default="new")
 
-    user_id = fields.Many2one(comodel_name='res.users', string='Buyer')
-    partner_id = fields.Many2one("res.partner", string="Partner", copy=False)
+    # user_id = fields.Many2one(comodel_name='res.users', string='Buyer')
+    partner_id = fields.Many2one("res.partner", string="Buyer", copy=False)
 
     estate_type = fields.Many2one(
         "estate.property.type", string="Property type")
     estate_tag = fields.Many2many("estate.property.tag", string="Property tag")
 
     estate_offer = fields.One2many(
-        "estate.property.offer", inverse_name="property_id", string="Property offer")
-
-    partner_id = fields.Many2one("res.partner")
+        "estate.property.offer", inverse_name="property_id", string="Property offer", default=0, ondelete='cascade',)
 
     total_area = fields.Float(compute="_compute_total",
                               string="Total Area (sqm)")
-    bet_offer = fields.Float(compute="_compute_total_offer", string="Bet offer", default = 0)
+    bet_offer = fields.Float(
+        compute="_compute_total_offer", string="Bet offer", default=0)
 
     @api.depends("living_area", "garden_area")
     def _compute_total(self):
@@ -56,5 +57,53 @@ class estate_property(models.Model):
         for record in self:
             if record.estate_offer:
                 record.bet_offer = max(record.estate_offer.mapped('price'))
-                
+            else:
+                record.bet_offer = 0
 
+    def action_selling(self):
+        for record in self:
+            if record.estate_offer:
+                offer_id = record.estate_offer.filtered(lambda a: a.state == "accepted")
+                record.selling_price = offer_id.price
+
+                # print("test......:",a.price)
+            else:
+                record.selling_price = 0
+
+    @api.constrains("expected_price")
+    def check_expected_price(self):
+        for record in self:
+            if record.expected_price <= 0:
+                raise ValidationError(
+                    "A property expected price must be strictly positive")
+
+    @api.onchange('garden')
+    def change_garden(self):
+        for record in self:
+            if record.garden == False:
+                record.garden_area = 0
+                record.garden_orientation = None
+            else:
+                record.garden_area = 10
+                record.garden_orientation = "north"
+
+    def action_sold(self):
+        for record in self:
+            if record.state:
+                if record.state == "cancel":
+                    raise ValidationError(
+                        "can not change status when status is cancel")
+                else:
+                    record.state = "sold"
+
+    def action_cancel(self):
+        for record in self:
+            record.state = "cancel"
+
+    # @api.depends("estate_offer.state")
+    # def change_form(self):
+    #     for record in self:
+    #         if record.estate_offer.state:
+    #             if record.estate_offer.state == "accepted":
+    #                 record.partner_id = record.estate_offer.partner_id
+    #                 record.selling_price = record.estate_offer.price
