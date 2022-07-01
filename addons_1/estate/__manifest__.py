@@ -9,7 +9,7 @@
     'maintainer': '',
     'website': '',
     'live_test_url': '',
-    'depends': ['project', 'hr'],
+    'depends': ['sale_management', 'hr'],
     'demo': [],
     'data': [
         'security/security.xml',
@@ -23,6 +23,9 @@
 
         'views/menus.xml',
         'views/estate_property_views.xml',
+        'views/estate_property_type_views.xml',
+        'views/estate_property_tag_views.xml',
+        'views/estate_property_offer_views.xml',
     ],
     # 'css': ['static/src/css/styles.css'],
     # 'images': ['static/description/icon.png'],

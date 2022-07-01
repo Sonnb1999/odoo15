@@ -10,6 +10,7 @@ class estate_property(models.Model):
     _name = 'estate.property'
     _description = "odoo exercise"
     _rec_name = "name"
+    _order = "id desc"
 
     name = fields.Char(string="Title", required=True)
     description = fields.Text(string="Description")
@@ -32,7 +33,7 @@ class estate_property(models.Model):
     state = fields.Selection(
         [('new', 'New'), ('old', 'Old'), ('sold', 'Sold'), ('cancel', 'Cancel')], string="Status", default="new")
 
-    # user_id = fields.Many2one(comodel_name='res.users', string='Buyer')
+    user_id = fields.Many2one(comodel_name='res.users', string='user')
     partner_id = fields.Many2one("res.partner", string="Buyer", copy=False)
 
     estate_type = fields.Many2one(
@@ -63,8 +64,8 @@ class estate_property(models.Model):
     def action_selling(self):
         for record in self:
             if record.estate_offer:
-                offer_id = record.estate_offer.filtered(lambda a: a.state == "accepted")
-                record.selling_price = offer_id.price
+                offer_filter = record.estate_offer.filtered(lambda a: a.state == "accepted")
+                record.selling_price = offer_filter.price
 
                 # print("test......:",a.price)
             else:

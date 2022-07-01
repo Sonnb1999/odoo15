@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="estate_property_type_view_tree" model="ir.ui.view">
+        <field name="name">estate.property.type.view.tree</field>
+        <field name="model">estate.property.type</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="name" />
+                <field name="sequence" />
+                <field name="property_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="estate_property_type_view_form" model="ir.ui.view">
+        <field name="name">estate.property.type.view.form</field>
+        <field name="model">estate.property.type</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_count" type="object" groups="" class="oe_stat_button" icon="fa-users">
+                            <field string="offer" name="offer_count" widget="statinfo"/>
+                        </button>
+                    </div>
+
+                    <group>
+                        <field name="name" />
+                        <field name="sequence" />
+                        <field name="offer_count" />
+
+                    </group>
+                    <notebook>
+                        <page string="properties">
+                            <field name="property_id" widget='one2many'>
+                                <tree string="">
+                                    <field name="name" />
+                                    <field name="selling_price" />
+                                    <field name="state" />
+                                </tree>
+
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="estate_property_type_action" model="ir.actions.act_window">
+        <field name="name">estate property type</field>
+        <field name="res_model">estate.property.type</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <!-- <field name="help" type="html"></field> -->
+    </record>
+
+    <menuitem id="estate_property_type" name="Property Type" action="estate_property_type_action" parent="advertisement_menu" sequence="10" />
+
+</odoo>

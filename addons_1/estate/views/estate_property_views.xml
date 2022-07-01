@@ -5,14 +5,19 @@
         <field name="name">estate.property.view.tree</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <tree string="">
-                <field name="name" />
-                <field name="postcode" />
-                <field name="bedrooms" />
-                <field name="living_area" />
-                <field name="expected_price" />
-                <field name="selling_price" />
-                <field name="date_availability" />
+            <tree string="" decoration-success="partner_id != False" decoration-muted="state == 'sold'" multi_edit="1">
+                <field optional="show" name="name" decoration-bf="partner_id != False" />
+                <field optional="show" name="estate_type" />
+                <field optional="show" name="postcode" />
+                <field optional="show" name="estate_tag" widget="many2many_tags" options="{'color_field':'color'}" />
+                <field optional="show" name="bedrooms" />
+                <field optional="show" name="living_area" />
+                <field optional="show" name="expected_price" />
+                <field optional="show" name="selling_price" />
+                <field optional="hide" name="date_availability" />
+                <field name="partner_id" />
+                <field optional="show" name="state" />
+
             </tree>
         </field>
     </record>
@@ -25,21 +30,35 @@
                 <Header>
                     <button string="Sold" name="action_sold" type="object" class="" />
                     <button string="Cancel" name="action_cancel" type="object" class="" />
-                    <button string="action1" name="action_selling" type="object"/>
+                    <!-- <button string="action1" name="action_selling" type="object"/>  -->
+                    <field name="state" widget="statusbar" statusbar_visible="new,old,sold,cancel" clickable="1" />
                 </Header>
+
+                <div class="oe_button_box" name="button_box">
+                    <!-- <button class="oe_stat_button" name="action_open_related_taxes" type="object" icon="fa-bars" attrs="{'invisible': [('related_taxes_amount', '=', 0)]}">
+                        <div class="o_stat_info">
+                            <span class="o_stat_value">
+                                <field name="related_taxes_amount"/>
+                            </span>
+                            <span class="o_stat_text">
+                                Taxes
+                            </span>
+                        </div>
+                    </button> -->
+                </div>
+
                 <sheet>
                     <div class="oe_title">
                         <h1>
                             <field name="name" class="field_name" placeholder="Subject..." />
                         </h1>
                     </div>
-                    <field name="estate_tag" widget="many2many_tags" />
+                    <field name="estate_tag" widget="many2many_tags" options="{'color_field':'color'}" />
                     <group>
                         <group>
                             <field name="estate_type" />
                             <field name="postcode" />
                             <field name="date_availability" />
-                            <field name="state" />
 
                         </group>
                         <group>
@@ -53,21 +72,21 @@
                     <notebook>
                         <page string="Description">
                             <group>
-                                <field name="description" />
+                                <field name="description" attrs="{'invisible': [('partner_id', '=', False)]}" />
                                 <field name="bedrooms" />
                                 <field name="living_area" />
                                 <field name="facades" />
                                 <field name="garden" widget="boolean_toggle" />
                                 <field name="garage" widget="boolean_toggle" />
-                                <field name="garden_area" />
-                                <field name="garden_orientation" />
+                                <field name="garden_area" attrs="{'invisible': [('garden', '=', False)]}" />
+                                <field name="garden_orientation" attrs="{'invisible': [('garden', '=', False)]}" />
                                 <field name="total_area" />
                             </group>
                         </page>
 
                         <page string="Offer">
-                            <field name="estate_offer" widget='one2many'>
-                                <tree string="" editable="top">
+                            <field name="estate_offer" widget='one2many' attrs="{'readonly': ['|',('state','in', ['sold','cancel']),('partner_id', '!=', False)]}">
+                                <tree string="" editable="top" decoration-success="state == 'accepted'" decoration-danger="state == 'refused'">
                                     <field name="price" />
                                     <field name="validity" />
                                     <field name="date_deadline" />
@@ -106,12 +125,14 @@
                     <separator />
                     <filter name="state_new" string="New" domain="[('state', '=',  'new')]" />
                     <filter name="state_old" string="Old" domain="[('state', '=',  'old')]" />
-                    <!-- <filter name="internship_filter" string="professional practice" domain="[('type_of_internship', '=',  'professional practice')]" /> -->
+                    <!-- <filter name="internship_filter" string="professional practice" domain="[('state', '=',  'professional practice')]" /> -->
                 </group>
 
                 <group expand='0' string='Group by...'>
                     <filter string='Bedrooms' name="bedrooms" context="{'group_by': 'bedrooms'}" />
                     <filter string='Status' name="state" context="{'group_by': 'state'}" />
+                    <field name="description" string="Name and description" filter_domain="['|', ('name', 'ilike', self), ('description', 'ilike', self)]"/>
+                    <filter name="property_type" string="House" domain="[('estate_type', '=', 'house')]"/>
                 </group>
 
             </search>
@@ -122,8 +143,8 @@
         <field name="name">Property</field>
         <field name="res_model">estate.property</field>
         <field name="view_mode">tree,form,search</field>
-        <field name="domain">[]</field>
-        <field name="context">{}</field>
+        <field name="domain"></field>
+        <field name="context">{'search_default_property_type': 1}</field>
         <!-- <field name="help" type="html">
             
         </field> -->

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="res_users_view_form" model="ir.ui.view">
+            <field name="name">res.users.view.form.inherit.estate</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <notebook>
+                    <page name="name" string="Real Estate Properties">
+                        <group name="messaging" position="inside">
+                            <field name="property_ids">
+                                <tree string="" decoration-success="partner_id != False" decoration-muted="state == 'sold'" multi_edit="1">
+                                    <field optional="show" name="name" decoration-bf="partner_id != False" />
+                                    <field optional="show" name="estate_type" />
+                                    <field optional="show" name="postcode" />
+                                    <field optional="show" name="estate_tag" widget="many2many_tags" options="{'color_field':'color'}" />
+                                    <field optional="show" name="bedrooms" />
+                                    <field optional="show" name="living_area" />
+                                    <field optional="show" name="expected_price" />
+                                    <field optional="show" name="selling_price" />
+                                    <field optional="hide" name="date_availability" />
+                                    <field name="partner_id" />
+                                    <field optional="show" name="state" />
+
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                </notebook>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>
