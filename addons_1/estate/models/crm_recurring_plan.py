@@ -37,7 +37,7 @@ class estate_property(models.Model):
     partner_id = fields.Many2one("res.partner", string="Buyer", copy=False)
 
     estate_type = fields.Many2one(
-        "estate.property.type", string="Property type")
+        "estate.property.type", string="Property type",group_expand='_expand_status')
     estate_tag = fields.Many2many("estate.property.tag", string="Property tag")
 
     estate_offer = fields.One2many(
@@ -47,6 +47,10 @@ class estate_property(models.Model):
                               string="Total Area (sqm)")
     bet_offer = fields.Float(
         compute="_compute_total_offer", string="Bet offer", default=0)
+
+
+    def _expand_status(self, states, domain, order):
+        return [key for key, val in type(self).th_status.selection]
 
     @api.depends("living_area", "garden_area")
     def _compute_total(self):
