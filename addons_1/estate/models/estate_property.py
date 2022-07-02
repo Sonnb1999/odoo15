@@ -38,7 +38,7 @@ class estate_property_type(models.Model):
             'view_mode': 'list,form',
             'view_type': 'list,form',
             'target': 'current',
-            'domain': [('property_type_id','=',self.id)],
+            'domain': [('property_type_id', '=', self.id)],
         }
 
 
@@ -114,6 +114,8 @@ class estate_property_offer(models.Model):
                         record.state = "accepted"
                         record.property_id.selling_price = record.price
                         record.property_id.partner_id = record.partner_id
+                        record.property_id.state = "offer_accepted"
+
                     else:
                         raise ValidationError(
                             "that the selling price cannot be lower than 90% of the expected price")
@@ -123,14 +125,17 @@ class estate_property_offer(models.Model):
             record.state = "refused"
             record.property_id.selling_price = 0
             record.property_id.partner_id = None
+            record.property_id.state = "old"
 
-    @api.onchange("state")
-    def change_state(self):
-        for record in self:
-            if record.state == "accepted":
 
-                record.property_id.selling_price = record.price
-                record.property_id.partner_id = record.partner_id
-            else:
-                record.property_id.selling_price = 0
-                record.property_id.partner_id = None
+    # @api.onchange("state")
+    # def change_state(self):
+    #     for record in self:
+    #         if record.state == "accepted":
+    #             record.property_id.selling_price = record.price
+    #             record.property_id.partner_id = record.partner_id
+    #             record.property_id.state = "offer_accepted"
+
+    #         else:
+    #             record.property_id.selling_price = 0
+    #             record.property_id.partner_id = None

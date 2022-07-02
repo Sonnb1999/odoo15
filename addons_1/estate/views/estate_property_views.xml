@@ -31,7 +31,7 @@
                     <button string="Sold" name="action_sold" type="object" class="" />
                     <button string="Cancel" name="action_cancel" type="object" class="" />
                     <!-- <button string="action1" name="action_selling" type="object"/>  -->
-                    <field name="state" widget="statusbar" statusbar_visible="new,old,sold,cancel" clickable="1" />
+                    <field name="state" widget="statusbar" statusbar_visible="new,old,sold,offer_accepted" clickable="1" />
                 </Header>
 
                 <div class="oe_button_box" name="button_box">
@@ -93,7 +93,7 @@
                                     <field name="partner_id" />
                                     <button name="action_accepted" type="object" icon="fa-check" />
                                     <button name="action_refused" type="object" icon="fa-times" />
-                                    <field name="state" />
+                                    <field name="state" optional = "hide"/>
                                     <!-- <field name="property_id" /> -->
                                 </tree>
                             </field>

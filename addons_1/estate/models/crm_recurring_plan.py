@@ -31,7 +31,7 @@ class estate_property(models.Model):
 
     active = fields.Boolean(string="Active", default=True)
     state = fields.Selection(
-        [('new', 'New'), ('old', 'Old'), ('sold', 'Sold'), ('cancel', 'Cancel')], string="Status", default="new")
+        [('new', 'new'), ('old', 'Offer Received'),('offer_accepted','Offer Accepted'),('sold', 'Sold'), ('cancel', 'Cancel')], string="Status", default="new")
 
     user_id = fields.Many2one(comodel_name='res.users', string='user')
     partner_id = fields.Many2one("res.partner", string="Buyer", copy=False)
