@@ -160,7 +160,7 @@
                     <filter string='Bedrooms' name="bedrooms" context="{'group_by': 'bedrooms'}" />
                     <filter string='Status' name="state" context="{'group_by': 'state'}" />
                     <field name="description" string="Name and description" filter_domain="['|', ('name', 'ilike', self), ('description', 'ilike', self)]"/>
-                    <filter name="property_type" string="estate type" context="{'group_by': 'estate_type'}"/>
+                    <!-- <filter name="state" string="estate type" context="{'group_by': 'state'}"/> -->
                     
                 </group>
 
@@ -173,7 +173,7 @@
         <field name="res_model">estate.property</field>
         <field name="view_mode">kanban,tree,form,search</field>
         <field name="domain"></field>
-        <field name="context">{'search_default_property_type': 1}</field>
+        <field name="context">{'search_default_state': 1}</field>
         <!-- <field name="help" type="html">
             
         </field> -->

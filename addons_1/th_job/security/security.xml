@@ -5,13 +5,17 @@
         <field name="name">th job</field>
     </record>
 
-    <record id="group_admin_job_manager" model="res.groups">
-        <field name="name">admin</field>
-        <field name="category_id" ref="th_job.th_job_access" />
-    </record>
+
 
     <record id="group_job_manager" model="res.groups">
         <field name="name">Job table</field>
+        <field name="category_id" ref="th_job.th_job_access" />
+    </record>
+
+
+    <record id="group_admin_job_manager" model="res.groups">
+        <field name="name">admin</field>
+        <field name="implied_ids" eval="[(4, ref('group_job_manager'))]"/>
         <field name="category_id" ref="th_job.th_job_access" />
     </record>
 

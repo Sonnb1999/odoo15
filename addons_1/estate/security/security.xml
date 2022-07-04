@@ -5,13 +5,15 @@
         <field name="name">estate</field>
     </record>
 
-    <record id="group_admin_estate_manager" model="res.groups">
-        <field name="name">admin</field>
+    
+    <record id="group_estate_manager" model="res.groups">
+        <field name="name">estate property table</field>
         <field name="category_id" ref="estate.estate_access" />
     </record>
 
-    <record id="group_estate_manager" model="res.groups">
-        <field name="name">estate property table</field>
+    <record id="group_admin_estate_manager" model="res.groups">
+        <field name="name">admin</field>
+        <field name="implied_ids" eval="[(4, ref('group_estate_manager'))]"/>
         <field name="category_id" ref="estate.estate_access" />
     </record>
 
