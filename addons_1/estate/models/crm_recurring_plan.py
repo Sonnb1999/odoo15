@@ -31,13 +31,13 @@ class estate_property(models.Model):
 
     active = fields.Boolean(string="Active", default=True)
     state = fields.Selection(
-        [('new', 'new'), ('old', 'Offer Received'),('offer_accepted','Offer Accepted'),('sold', 'Sold'), ('cancel', 'Cancel')], string="Status", default="new")
+        [('new', 'new'), ('old', 'Offer Received'), ('offer_accepted', 'Offer Accepted'), ('sold', 'Sold'), ('cancel', 'Cancel')], string="Status", default="new")
 
     user_id = fields.Many2one(comodel_name='res.users', string='user')
     partner_id = fields.Many2one("res.partner", string="Buyer", copy=False)
     # group_expand='_expand_status'
     estate_type = fields.Many2one(
-        "estate.property.type", string="Property type",)
+        "estate.property.type", string="Property type", group_expand='_read_group_stage_ids')
     estate_tag = fields.Many2many("estate.property.tag", string="Property tag")
 
     estate_offer = fields.One2many(
@@ -48,9 +48,34 @@ class estate_property(models.Model):
     bet_offer = fields.Float(
         compute="_compute_total_offer", string="Bet offer", default=0)
 
+    contract = fields.Char(string="contract", readonly=True)
 
-    # def _expand_status(self, states, domain, order):
-    #     return [key for key, val in type(self).state.selection]
+    def _expand_status(self, states, domain, order):
+        return [key for key, val in type(self).estate_type.selection]
+
+    @api.model
+    def create(self, vals):
+        vals['contract'] = self.env['ir.sequence'].next_by_code(
+            'estate.property')
+        return super().create(vals)
+
+    def write(self, vals):
+        if not self.contract and not vals.get('contract'):
+            vals['contract'] = self.env['ir.sequence'].next_by_code(
+                'estate.property')
+        return super().write(vals)
+
+    # get default value
+    def default_get(self, fields_list):
+        res = super().default_get(fields_list)
+        res['selling_price'] = 500
+        res['expected_price'] = 500
+        return res
+
+    @api.model
+    def _read_group_stage_ids(self, stages, domain, order):
+        stage_ids = self.env['estate.property.type'].search([])
+        return stage_ids
 
     @api.depends("living_area", "garden_area")
     def _compute_total(self):
@@ -68,7 +93,8 @@ class estate_property(models.Model):
     def action_selling(self):
         for record in self:
             if record.estate_offer:
-                offer_filter = record.estate_offer.filtered(lambda a: a.state == "accepted")
+                offer_filter = record.estate_offer.filtered(
+                    lambda a: a.state == "accepted")
                 record.selling_price = offer_filter.price
 
                 # print("test......:",a.price)

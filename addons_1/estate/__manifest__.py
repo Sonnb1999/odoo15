@@ -14,7 +14,7 @@
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
-        # 'data/partner_tag_data.xml',
+        'data/sequences_data.xml',
         # 'data/partners.tag.csv',
         # 'data/cron.xml',
         # 'wizards/batch_update_student.xml',
@@ -28,7 +28,7 @@
         'views/estate_property_offer_views.xml',
     ],
     # 'css': ['static/src/css/styles.css'],
-    # 'images': ['static/description/icon.png'],
+    'images': ['static/description/icon.png'],
     'installable': True,
     'application': True,
     'auto_install': False,

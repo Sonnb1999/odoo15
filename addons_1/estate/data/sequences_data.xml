@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Sequences for sale.order -->
+    <record id="seq_estate" model="ir.sequence">
+        <field name="name">Estate</field>
+        <field name="code">estate.property</field>
+        <field name="prefix">ES</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+</odoo>

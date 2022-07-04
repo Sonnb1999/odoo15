@@ -40,11 +40,13 @@
                     <div class="oe_title">
                         <h1>
                             <field name="name" class="field_name" placeholder="Subject..." />
+                            
                         </h1>
                     </div>
                     <field name="estate_tag" widget="many2many_tags" options="{'color_field':'color'}" />
                     <group>
                         <group>
+                            <field name="contract" />
                             <field name="estate_type" />
                             <field name="postcode" />
                             <field name="date_availability" />
@@ -160,7 +162,7 @@
                     <filter string='Bedrooms' name="bedrooms" context="{'group_by': 'bedrooms'}" />
                     <filter string='Status' name="state" context="{'group_by': 'state'}" />
                     <field name="description" string="Name and description" filter_domain="['|', ('name', 'ilike', self), ('description', 'ilike', self)]"/>
-                    <!-- <filter name="state" string="estate type" context="{'group_by': 'state'}"/> -->
+                    <filter name="property_type" string="estate type" context="{'group_by': 'estate_type'}"/>
                     
                 </group>
 
@@ -173,7 +175,7 @@
         <field name="res_model">estate.property</field>
         <field name="view_mode">kanban,tree,form,search</field>
         <field name="domain"></field>
-        <field name="context">{'search_default_state': 1}</field>
+        <field name="context">{'search_default_property_type': 1}</field>
         <!-- <field name="help" type="html">
             
         </field> -->

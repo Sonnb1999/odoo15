@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <menuitem id="estate_menu" name="Real Estate" sequence="10" />
+    <menuitem id="estate_menu" name="Real Estate" sequence="10" web_icon="estate,static/description/icon.png"/>
     <menuitem id="advertisement_menu" name="Advertisements" parent="estate_menu" sequence="10" />
 </odoo>

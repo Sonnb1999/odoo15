@@ -41,6 +41,17 @@ class estate_property_type(models.Model):
             'domain': [('property_type_id', '=', self.id)],
         }
 
+    # get name function
+    def name_get(self):
+        # print("ok....", self)
+        # result = []
+        # for record in self:
+        #     name =  record.name  + ': ' + str(record.sequence)
+        #     result.append((record.id, name))
+        # return result
+
+        return [(record.id,"%s: %s" % (record.name,record.sequence)) for record in self]
+
 
 class estate_property_tag(models.Model):
     _name = "estate.property.tag"
