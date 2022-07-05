@@ -54,7 +54,6 @@ class instructors(models.Model):
 
     # file
     file_register = fields.Binary(string="file register")
-   
 
     file_report = fields.Binary(string="file report")
     file_outline = fields.Binary(string="file outline")
@@ -92,22 +91,23 @@ class instructors(models.Model):
                     self.student_count = str(student_count_def)
         else:
             self.student_count = str(0)
-    
+
     @api.model
     def create(self, vals_list):
 
-        use_in_group_teacher = self.env.user.has_group(
-            'internship_manager.group_teacher_manager')
-        if use_in_group_teacher == True:
-            raise ValidationError(
-                'Only user belongs to admin are allowed to ....')
+        # use_in_group_teacher = self.env.user.has_group(
+        #     'internship_manager.group_teacher_manager')
+        # print("ok>>>>",use_in_group_teacher)
+        # if use_in_group_teacher == True:
+        #     raise ValidationError(
+        #         'Only user belongs to admin are allowed to ....')
         return super().create(vals_list)
 
-    
     def write(self, vals):
-        use_in_group_teacher = self.env.user.has_group(
-            'internship_manager.group_teacher_manager')
-        if use_in_group_teacher == True:
+        check_user = self.env.user.has_group(
+            'internship_manager.group_department_manager')
+
+        if check_user == False:
             for record in self:
                 if record.plan_id:
                     if record.course_id == record.plan_id.course_id:
@@ -121,20 +121,12 @@ class instructors(models.Model):
                                 return super().write(vals)
                             else:
                                 raise ValidationError(
-                                    "this time is not to update information1")
+                                    "this time is not to update information")
                         else:
                             raise ValidationError(
-                                "this time is not to update information2")
+                                "This course is not scheduled to be updated")
                 else:
                     raise ValidationError(
                         "This course is not scheduled to be updated")
         else:
             return super().write(vals)
-
-    # def unlink(self):
-    #     use_in_group_teacher = self.env.user.has_group(
-    #         'internship_manager.group_teacher_manager')
-    #     if use_in_group_teacher == True:
-    #         raise ValidationError(
-    #             'Only user belongs to admin are allowed to delete')
-    #     return super().unlink()
