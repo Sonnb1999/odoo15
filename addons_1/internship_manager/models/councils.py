@@ -20,9 +20,9 @@ class councils(models.Model):
     _rec_name = 'course_id'
 
     teacher_id = fields.Many2one(
-        comodel_name='teachers', string='Teacher name', required=True)
+        comodel_name='teachers', string='Teacher name', required=True, ondelete='cascade')
     course_id = fields.Many2one(
-        comodel_name='courses', string='Course name', required=True)
+        comodel_name='courses', string='Course name', required=True, ondelete='cascade') 
 
     course_start_time = fields.Date(
         related='course_id.start_time', string='Course start time', store=True)
