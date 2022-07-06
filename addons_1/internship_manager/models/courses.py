@@ -9,6 +9,7 @@ Type_of_education = [('formal_university', 'Formal university'),
 Type_of_internship = [('internship', 'Internship'), (
     'professional_practice', 'Professional practice'), ('graduation_thesis', 'Graduation thesis')]
 
+
 class courses(models.Model):
     _name = 'courses'
     _description = 'course list'
@@ -27,7 +28,8 @@ class courses(models.Model):
     instructor_ids = fields.One2many(
         'instructors', 'course_id', string='instructors', tracking=True)
 
-    plan_id = fields.One2many('plans','course_id',string="plans",tracking=True)
+    plan_id = fields.One2many('plans', 'course_id',
+                              string="plans", tracking=True)
 
     active_course = fields.Selection([
         ('not_started_yet', 'not started yet'),
@@ -52,6 +54,10 @@ class courses(models.Model):
         for record in self:
             if record.start_time > record.end_time:
                 raise ValidationError('start time < end time')
+
+    def name_get(self):
+
+        return [(record.id, "%s/%s/%s" % (record.course_name, record.school_year, record.type_of_internship)) for record in self]
 
     def action_test(self):
         return {

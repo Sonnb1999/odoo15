@@ -23,7 +23,7 @@ class instructors(models.Model):
     student_count = fields.Char(
         string='number of student', compute='compute_count_student', store=False)
     student_id = fields.Many2one(
-        comodel_name='students', string='student name', required=True, domain="[('instructor_id','=',student_id)]")
+        comodel_name='students', string='student name', required=True, domain="[('instructor_id','=',student_id)]", ondelete='cascade')
 
     student_image = fields.Binary(related='student_id.student_image')
 

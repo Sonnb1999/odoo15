@@ -139,11 +139,12 @@
         <field name="name">Students</field>
         <field name="res_model">students</field>
         <field name="view_mode">tree,form,kanban,graph</field>
-        <!-- <field name="domain">[]</field>
-        <field name="context">{}</field> -->
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
         <!-- <field name="help" type="html">
         </field> -->
     </record>
 
     <menuitem id="student_sub" name="Student List" action="students_action" parent="class_management" sequence="10" />
+    <!-- <menuitem id="student_sub" name="Student List" action="students_action" parent="class_management1" sequence="10" /> -->
 </odoo>

@@ -21,6 +21,7 @@
         'wizards/batch_update_teacher.xml',
         'wizards/batch_update_course.xml',
         'views/menu.xml',
+        
         'views/courses.xml',
         'views/partners.xml',
         'views/instructors.xml',
