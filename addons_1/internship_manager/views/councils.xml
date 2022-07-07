@@ -70,5 +70,5 @@
             
         </field> -->
     </record>
-    <menuitem id="council_sub" name="Council List" action="councils_action" parent="course_management" sequence="10" />
+    <menuitem id="council_sub" name="Council List" action="councils_action" parent="teacher_management" sequence="10" />
 </odoo>

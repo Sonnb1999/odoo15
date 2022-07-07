@@ -6,16 +6,17 @@
         <field name="model">instructors</field>
         <field name="arch" type="xml">
             <tree string="" sample="1" multi_edit="1">
-                <field name="student_id" />
-                <field name="student_code" />
-                <field name="active_i" />
-                <field name="birthday" />
-                <field name="class_id" />
-                <field name="teacher_id" />
-                <field name="user_id" />
-                <field name="email" />
-                <field name="phone_number" />
-                <field name="plan_id" />
+                <field optional="show" name="student_id" />
+                <field optional="show" name="student_code" />
+                <field optional="show" name="active_i" />
+                <field optional="show" name="birthday" />
+                <field optional="show" name="class_id" />
+                <field optional="show" name="teacher_id" />
+                <field optional="show" name="user_id" />
+                <field optional="show" name="email" />
+                <field optional="show" name="phone_number" />
+                <field optional="show" name="plan_id" />
+                <field optional="hide" name="course_id" />
                 <!-- <field name="count_student" /> -->
             </tree>
         </field>
@@ -46,6 +47,12 @@
                     <filter string='Class list' name="class_group" context="{'group_by': 'class_id'}" />
                     <filter string='Course list' name="course_group" context="{'group_by': 'course_id'}" />
                 </group>
+
+                <searchpanel>
+                    <!-- <field name="educational_system" icon="fa-users" select='multi' /> -->
+                    <field name="course_id" icon="fa-list" enable_counters="1"/>
+                    <field name="class_id" icon="fa-th" enable_counters="1"/>
+                </searchpanel>
             </search>
         </field>
     </record>
@@ -140,5 +147,5 @@
             
         </field> -->
     </record>
-    <menuitem id="instructor_sub" name="Instructor List" action="instructors_action" parent="course_management" sequence="10" />
+    <menuitem id="instructor_sub" name="Instructor List" action="instructors_action" parent="student_management" sequence="10" />
 </odoo>

@@ -145,8 +145,8 @@
                 </group>
 
                 <searchpanel>
-                    <field name="educational_system" icon="fa-users" select='multi' />
-                    <field name="type_of_internship" icon="fa-mars" select='multi' />
+                    <field name="educational_system" icon="fa-filter" select='multi' />
+                    <field name="type_of_internship" icon="fa-list" select='multi' />
                 </searchpanel>
             </search>
         </field>

@@ -32,13 +32,13 @@ class instructors(models.Model):
 
     birthday = fields.Date(related='student_id.birthday', string='birthday')
 
-    active_i = fields.Boolean(string='active')
+    active_i = fields.Boolean(string='active', default=True)
 
     class_id = fields.Many2one(
         related='student_id.class_id', string='class name', store=True)
 
     course_id = fields.Many2one(
-        related='class_id.course_id', string='course name', store=True)
+        related='class_id.course_id', string='course name', store=True, group_expand='_read_group_stage_ids')
 
     teacher_id = fields.Many2one(
         comodel_name='teachers', string='teacher name')
@@ -60,6 +60,11 @@ class instructors(models.Model):
 
     _sql_constraints = [
         ('student_id', 'UNIQUE (student_id)', 'student already exists')]
+
+    @api.model
+    def _read_group_stage_ids(self, stages, domain, order):
+        stage_ids = self.env['courses'].search([])
+        return stage_ids
 
     @api.constrains('student_id')
     def studentValidate(self):

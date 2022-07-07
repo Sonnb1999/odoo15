@@ -28,7 +28,7 @@ class students(models.Model):
         'instructors', 'student_id', 'instructor list')
 
     class_id = fields.Many2one(
-        comodel_name='classes', string='class name', required=True)
+        comodel_name='classes', string='class name', required=True, ondelete="cascade")
     course_id = fields.Many2one(
         related='class_id.course_id', string='course name', store=True)
 
