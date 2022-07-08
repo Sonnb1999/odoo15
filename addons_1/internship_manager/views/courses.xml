@@ -40,7 +40,7 @@
                         <field name="course_name" />
                         <field name="educational_system" default_focus="1" />
                         <field name="type_of_internship" decoration-success="type_of_internship == 'professional_practice'" decoration-info="type_of_internship == 'internship'" decoration-warning="type_of_internship == 'graduation_thesis'" />
-                        <field name="active_course" />
+                        <field name="active_course"/>
                         <field name="tag_partners" widget="many2many_tags" options="{'color_field':'color'}" />
                     </group>
                     <notebook>
