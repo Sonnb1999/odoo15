@@ -43,7 +43,7 @@
     </record>
 
     <!-- configurations -->
-    <menuitem id="configurations" name="Configurations" action="partners_action" parent="internship_root" sequence="1" />
+    <menuitem id="configurations" name="Configurations" action="partners_action" parent="internship_root" sequence="10" />
     <!-- <menuitem id="partners_managerment" name="partners managerment" action="partners_action" parent="configurations" sequence="10" /> -->
 
 </odoo>

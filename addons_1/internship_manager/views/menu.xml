@@ -5,10 +5,7 @@
 
     <!-- submenu course -->
     <menuitem id="course_management" name="Course management" parent="internship_root" sequence="-1" />
-
-    
     <!-- submenu class -->
-    
     <menuitem id="teacher_management" name="Teacher management" parent="internship_root" sequence="0" />
     
     <menuitem id="student_management" name="Student management" parent="internship_root" sequence="1" />

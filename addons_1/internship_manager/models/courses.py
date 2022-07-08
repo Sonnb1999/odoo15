@@ -57,7 +57,7 @@ class courses(models.Model):
 
     def name_get(self):
 
-        return [(record.id, "%s/%s/%s" % (record.course_name, record.school_year, record.type_of_internship)) for record in self]
+        return [(record.id, "%s/%s/%s" % (record.course_name, record.educational_system, record.type_of_internship)) for record in self]
 
     def action_test(self):
         return {

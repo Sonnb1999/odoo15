@@ -11,6 +11,7 @@ access_courses,access.courses,model_courses,internship_manager.group_teacher_man
 access_classes_admin,access.classes.admin,model_classes,internship_manager.group_admin_manager,1,1,1,1
 access_classes_faculty_office,access.courses.admin,model_classes,internship_manager.group_faculty_office_manager,1,1,1,1
 access_classes,access.classes,model_classes,internship_manager.group_teacher_manager,1,0,0,0
+access_orentation_class,access.orentation_class,model_orentation_class,internship_manager.group_teacher_manager,1,1,1,1
 
 access_teachers_admin,access.teachers.admin,model_teachers,internship_manager.group_admin_manager,1,1,1,1
 access_teachers_department_manager,access.teachers.admin,model_teachers,internship_manager.group_department_manager,1,1,1,1

@@ -41,6 +41,18 @@ class students(models.Model):
     student_state = fields.Many2one(
         'res.country.state', string="State", store=True)
 
+    orientation_class = fields.Many2one("orentation.class", store=True)
+
+    @api.onchange('class_id')
+    def change_class(self):
+        ids = self.env['orentation.class'].search([(
+            "class_id", "=", self.class_id.id
+        )])
+
+        return {
+            "domain": {"orientation_class": [('id', 'in', ids.ids)]}
+        }
+
     @api.onchange('student_country')
     def change_country(self):
         ids = self.env['res.country.state'].search(

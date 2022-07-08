@@ -1,6 +1,7 @@
 from . import res_intern_users
 from . import students
 from . import courses
+from . import orientation_class
 from . import classes
 from . import teachers
 from . import plans

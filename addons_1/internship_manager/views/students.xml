@@ -6,17 +6,18 @@
         <field name="model">students</field>
         <field name="arch" type="xml">
             <tree string="">
-                <field name="student_name" />
-                <field name="student_code" />
-                <field name="gender" />
-                <field name="birthday" />
-                <field name="address" />
-                <field name="student_country" />
-                <field name="student_state" />
-                <field name="phone_number" />
-                <field name="email" />
-                <field name="class_id" />
-                <field name="course_id" />
+                <field optional="show" name="student_name" />
+                <field optional="show" name="student_code" />
+                <field optional="show" name="gender" />
+                <field optional="show" name="birthday" />
+                <field optional="show" name="address" />
+                <field optional="show" name="student_country" />
+                <field optional="show" name="student_state" />
+                <field optional="show" name="phone_number" />
+                <field optional="show" name="email" />
+                <field optional="show" name="orientation_class" />
+                <field optional="show" name="class_id" />
+                <field optional="hide" name="course_id" />
                 <!-- <field name="instructor_id" /> -->
 
             </tree>
@@ -80,21 +81,31 @@
                 <sheet>
                     <field name="student_image" widget='image' class="oe_avatar" options='{"zoom": true}' />
                     <group>
-                        <field name="student_name" />
-                        <field name="student_code" />
-                        <field name="class_id" />
-                        <field name="course_id" />
+                        <group>
+                            <field name="student_name" />
+                            <field name="student_code" />
+                        </group>
+                        <group>
+                            <field name="course_id" />
+                            <field name="class_id" />
+                            <field name="orientation_class" />
+
+                        </group>
                     </group>
                     <notebook>
                         <page string="infomation">
                             <group>
-                                <field name="gender" />
-                                <field name="birthday" />
-                                <field name="phone_number" widget="phone" />
-                                <field name='email' widget="email" />
-                                <field name="address" />
-                                <field name="student_country" />
-                                <field name="student_state" />
+                                <group>
+                                    <field name="gender" />
+                                    <field name="birthday" />
+                                    <field name="phone_number" widget="phone" />
+                                    <field name='email' widget="email" />
+                                </group>
+                                <group>
+                                    <field name="address" />
+                                    <field name="student_country" />
+                                    <field name="student_state" />
+                                </group>
                             </group>
                         </page>
                     </notebook>

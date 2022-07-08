@@ -30,15 +30,18 @@
                     </group>
                     <notebook>
                         <page string="Time">
-                            <group>
-                                <field name="course_start_time" />
-                                <field name="course_end_time" />
+                            <group >
+                                <group>
+                                    <field name="course_start_time" />
+                                    <field name="course_end_time" />
+                                </group>
+                                <group>
+                                    <field name="start_time" />
+                                    <field name="end_time" />
+                                </group>
                             </group>
-                            <group>
-                                <field name="start_time" />
-                                <field name="end_time" />
-                            </group>
-                           
+
+
                         </page>
                         <page name="name" string="email">
                             <group>
@@ -111,12 +114,12 @@
     <record id="plans_action" model="ir.actions.act_window">
         <field name="name">plans</field>
         <field name="res_model">plans</field>
-        <field name="view_mode">calendar,tree,form,activity</field>
+        <field name="view_mode">tree,form,calendar,activity</field>
         <!-- <field name="domain">[]</field>
         <field name="context">{}</field> -->
         <!-- <field name="help" type="html">
         </field> -->
     </record>
 
-    <menuitem id="plan_sub" name="plan List" action="plans_action" parent="course_management" sequence="1" />
+    <menuitem id="plan_sub" name="Plan List" action="plans_action" parent="course_management" sequence="1" />
 </odoo>

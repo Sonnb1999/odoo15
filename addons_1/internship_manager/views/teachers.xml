@@ -6,16 +6,15 @@
         <field name="model">teachers</field>
         <field name="arch" type="xml">
             <tree string="">
-                <field name="teacher_name" />
-                <field name="user_id" widget="many2one_avatar_user" />
-                <field name="birthday" />
-                <field name="gender" />
-                <field name="address" />
-                <field name="teacher_country" />
-                <field name="teacher_state" />
-                <field name='email' />
-                <field name="phone_number" />
-
+                <field optional="show" name="teacher_name" />
+                <field optional="show" name="user_id" widget="many2one_avatar_user" />
+                <field optional="show" name="birthday" />
+                <field optional="show" name="gender" />
+                <field optional="show" name="address" />
+                <field optional="show" name="teacher_country" />
+                <field optional="show" name="teacher_state" />
+                <field optional="show" name='email' />
+                <field optional="show" name="phone_number" />
             </tree>
         </field>
     </record>
@@ -28,20 +27,24 @@
                 <sheet>
                     <group>
                         <field name="teacher_name" />
-
                         <field name="user_id" widget="many2one_avatar" />
+                        <field name='email' widget="email"/>
                         <field name="active" />
                     </group>
                     <notebook>
                         <page string="information">
                             <group>
-                                <field name="gender" />
-                                <field name="birthday" />
-                                <field name="phone_number" widget="phone" />
-                                <field name="address" />
-                                <field name="teacher_country" />
-                                <field name="teacher_state" />
-                                <field name='email' widget="email"/>
+                                <group >
+                                    <field name="gender" />
+                                    <field name="birthday" />
+                                    <field name="phone_number" widget="phone" />
+                                </group>
+
+                                <group >
+                                    <field name="address" />
+                                    <field name="teacher_country" />
+                                    <field name="teacher_state" />
+                                </group>
                             </group>
                         </page>
 

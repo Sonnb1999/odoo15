@@ -1,5 +1,3 @@
-from email.policy import default
-from operator import index
 from odoo import fields, api, models
 from odoo.exceptions import ValidationError
 import datetime
@@ -28,9 +26,6 @@ class th_job(models.Model):
 
     _sql_constraints = [
         ('th_mission', 'UNIQUE (th_mission)', 'Mission all already exists')]
-
-    # _sql_constraints = [
-    #     ('course_name', 'UNIQUE (course_name)', 'Course all already exists')]
 
     def _expand_status(self, states, domain, order):
         return [key for key, val in type(self).th_status.selection]

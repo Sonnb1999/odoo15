@@ -109,19 +109,20 @@
             <form string="">
                 <sheet>
                     <group>
-                        <field name="student_id" />
-                        <field name="student_code" />
-                        <field name="active_i" />
-                        <field name="birthday" />
-                        <field name="class_id" />
-                        <field name="course_id" />
-                    </group>
-                    <group>
-                        <field name="teacher_id" />
-                        <field name="student_count" />
-                        <field name="email" widget='email' />
-                        <field name="phone_number" widget='phone' />
-                        <field name="plan_id" />
+                        <group>
+                            <field name="student_id" />
+                            <field name="student_code" />
+                            <field name="active_i" />
+                            <field name="birthday" />
+                            <field name="class_id" />
+                            <field name="course_id" />
+                        </group>
+                        <group>
+                            <field name="teacher_id" />
+                            <field name="student_count" />
+                            <field name="email" widget='email' />
+                            <field name="phone_number" widget='phone' />
+                        </group>
                     </group>
                     <notebook>
                         <page name="file" string="file">
@@ -130,6 +131,9 @@
                                 <field name="file_report" filename="file_name" widget="binary" options="{'accepted_file_extensions': '.pdf,.svg'}" />
                                 <field name="file_outline" filename="file_name" widget="binary" options="{'accepted_file_extensions': '.pdf,.svg'}" />
                             </group>
+                        </page>
+                        <page name="name" string="Plan">
+                            <field name="plan_id" />
                         </page>
                     </notebook>
                 </sheet>
@@ -141,8 +145,8 @@
         <field name="name">instructors</field>
         <field name="res_model">instructors</field>
         <field name="view_mode">tree,form,kanban,graph</field>
-        <!-- <field name="domain">[]</field>
-        <field name="context">{}</field> -->
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
         <!-- <field name="help" type="html">
             
         </field> -->
