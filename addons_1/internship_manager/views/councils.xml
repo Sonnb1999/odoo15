@@ -6,7 +6,7 @@
         <field name="model">councils</field>
         <field name="arch" type="xml">
             <tree string="">
-                <field name="teacher_id" />
+                <!-- <field name="teacher_id" /> -->
                 <field name="course_id" />
                 <field name="exam_forms" />
                 <field name="location" />
@@ -23,7 +23,7 @@
             <form string="">
                 <sheet>
                     <group>
-                        <field name="teacher_id" />
+                        <!-- <field name="teacher_id" /> -->
                         <field name="course_id" />
                         <field name="exam_forms" />
                         <field name="location" />
@@ -52,7 +52,7 @@
         <field name="arch" type="xml">
             <search string="">
                 <field name="course_id" />
-                <field name="teacher_id" />
+                <!-- <field name="teacher_id" /> -->
                 <group expand='0' string='Group by...'>
                     <filter string='course list' name="course_group" context="{'group_by': 'course_id'}" />
                 </group>

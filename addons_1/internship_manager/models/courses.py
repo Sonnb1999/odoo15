@@ -18,6 +18,7 @@ class courses(models.Model):
 
     course_name = fields.Char(string='course name',
                               required=True, tracking=True, help="the name of the course")
+    sequence = fields.Integer(string="sequence")
     school_year = fields.Char(string='school_year', tracking=True)
     educational_system = fields.Selection(Type_of_education, tracking=True)
     type_of_internship = fields.Selection(Type_of_internship, tracking=True)
@@ -56,8 +57,7 @@ class courses(models.Model):
                 raise ValidationError('start time < end time')
 
     def name_get(self):
-
-        return [(record.id, "%s/%s/%s" % (record.course_name, record.educational_system, record.type_of_internship)) for record in self]
+        return [(record.id, "%s/%s" % (record.course_name, record.type_of_internship)) for record in self]
 
     def action_test(self):
         return {
@@ -87,14 +87,33 @@ class courses(models.Model):
                 }
             }
 
+    def action_send_mail(self):
+        template_id = self.env.ref(
+            "internship_manager.email_template").id
+
+        for record in self.instructor_ids.teacher_id:
+            print("ok....", record.work_email)
+
+            mail_template_info = self.env["mail.template"].browse(template_id).send_mail(
+                self.id,
+                force_send=True,
+                email_values={
+                    'auto_delete': True,
+                    'email_from':"sonvbvnvn@gmail.com",
+                    'email_to': record.work_email,
+                    'message_type': 'user_notification',
+                    'author_id': record.id,
+                },
+            )
+        # truyen du lieu cho self.id cho object
+        #
+
     def action_cancel(self):
         for record in self:
             record.state = "cancel"
 
     @api.model
     def create(self, vals):
-        # print('odoo create course >>>>>', vals)
-        # vals['type_of_internship'] = ''
         return super(courses, self).create(vals)
 
     def write(self, vals):

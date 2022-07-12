@@ -19,8 +19,8 @@ class councils(models.Model):
     _description = 'council list'
     _rec_name = 'course_id'
 
-    teacher_id = fields.Many2one(
-        comodel_name='teachers', string='Teacher name', required=True, ondelete='cascade')
+    # teacher_id = fields.Many2one(
+    #     comodel_name='teachers', string='Teacher name', required=True, ondelete='cascade')
     course_id = fields.Many2one(
         comodel_name='courses', string='Course name', required=True, ondelete='cascade') 
 

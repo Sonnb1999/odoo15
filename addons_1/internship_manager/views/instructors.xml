@@ -12,7 +12,6 @@
                 <field optional="show" name="birthday" />
                 <field optional="show" name="class_id" />
                 <field optional="show" name="teacher_id" />
-                <field optional="show" name="user_id" />
                 <field optional="show" name="email" />
                 <field optional="show" name="phone_number" />
                 <field optional="show" name="plan_id" />
@@ -21,17 +20,6 @@
             </tree>
         </field>
     </record>
-
-    <!-- <record id="instructors_view_graph" model="ir.ui.view">
-        <field name="name">instructors.view.graph</field>
-        <field name="model">instructors</field>
-        <field name="arch" type="xml">
-            <graph string="number of class" type="bar">
-                <field name="class_id" />
-                <field name="teacher_id" />
-            </graph>
-        </field>
-    </record> -->
 
     <record id="instructors_view_search" model="ir.ui.view">
         <field name="name">instructors.view.search</field>
@@ -48,9 +36,10 @@
                     <filter string='Course list' name="course_group" context="{'group_by': 'course_id'}" />
                 </group>
 
-                <searchpanel>
+                <!-- class="account_root" -->
+                <searchpanel >
                     <!-- <field name="educational_system" icon="fa-users" select='multi' /> -->
-                    <field name="course_id" icon="fa-list" enable_counters="1"/>
+                    <field name="course_id" icon="fa-filter" enable_counters="1"/>
                     <field name="class_id" icon="fa-th" enable_counters="1"/>
                 </searchpanel>
             </search>
@@ -118,6 +107,7 @@
                             <field name="course_id" />
                         </group>
                         <group>
+                            <field name="department_id" />
                             <field name="teacher_id" />
                             <field name="student_count" />
                             <field name="email" widget='email' />

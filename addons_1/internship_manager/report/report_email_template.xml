@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- <report id="report_course" string="report course" model = "courses"
+    report_type = "qweb-pdf" name="courses.report" file="courses.report" /> -->
+
+    <record id="report_course" model="ir.actions.report">
+        <field name="name">report course</field>
+        <field name="model">courses</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">internship_manager.report_course</field>
+        <field name="report_file">internship_manager.report_course</field>
+       
+        <!-- <field name="print_report_name">(object._get_report_base_filename())</field>
+        <field name="attachment">(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')</field>
+        <field name="binding_model_id" ref="model_account_move"/>
+        <field name="binding_type">report</field>
+        <field name="groups_id" eval="[(4, ref('account.group_account_invoice')),
+(4, ref('account.group_account_readonly'))]"/> -->
+    </record>
+
+    <!-- <template id="report_course">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>Sample Report</h2>
+                        <p>span t-field="o.course_name"/></p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template> -->
+
+    
+</odoo>

@@ -14,18 +14,20 @@
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
-        # 'data/partner_tag_data.xml',
+        'data/mail_template_data.xml',
+        # 'report/report_mail_template.xml'
         # 'data/partners.tag.csv',
         # 'data/cron.xml',
         'wizards/batch_update_student.xml',
-        'wizards/batch_update_teacher.xml',
+        # 'wizards/batch_update_teacher.xml',
         'wizards/batch_update_course.xml',
         'views/menu.xml',
         
         'views/courses.xml',
         'views/partners.xml',
         'views/instructors.xml',
-        'views/teachers.xml',
+        # 'views/teachers.xml',
+        'views/teacher1.xml',
         'views/plans.xml',
         'views/classes.xml',
         'views/students.xml',

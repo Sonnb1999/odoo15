@@ -35,7 +35,7 @@
     <record id="instructor_rule_teacher_id" model="ir.rule">
         <field name="name">instructor rule</field>
         <field name="model_id" ref="model_instructors" />
-        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="domain_force">[('user_id', '=', user.id),('course_id.active_course', '=', 'started')]</field>
         <field name="groups" eval="[(4, ref('internship_manager.group_teacher_manager'))]" />
         <field name="perm_read" eval="True" />
         <field name="perm_create" eval="False" />

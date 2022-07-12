@@ -13,9 +13,7 @@ access_classes_faculty_office,access.courses.admin,model_classes,internship_mana
 access_classes,access.classes,model_classes,internship_manager.group_teacher_manager,1,0,0,0
 access_orentation_class,access.orentation_class,model_orentation_class,internship_manager.group_teacher_manager,1,1,1,1
 
-access_teachers_admin,access.teachers.admin,model_teachers,internship_manager.group_admin_manager,1,1,1,1
-access_teachers_department_manager,access.teachers.admin,model_teachers,internship_manager.group_department_manager,1,1,1,1
-access_teachers,access.teachers,model_teachers,internship_manager.group_teacher_manager,1,0,0,0
+
 
 access_res_intern_users,access.res.intern.users,model_res_intern_users,internship_manager.group_admin_manager,1,1,1,1
 
@@ -36,5 +34,4 @@ access_partners,access.partners,model_partners,internship_manager.group_departme
 
 
 access_students_batchupdate_wizard,access.students_batchupdate_wizard,model_students_batchupdate_wizard,group_admin_manager,1,1,1,1
-access_teachers_batchupdate_wizard,access.teachers_batchupdate_wizard,model_teachers_batchupdate_wizard,group_admin_manager,1,1,1,1
 access_courses_batchupdate_wizard,access.courses_batchupdate_wizard,model_courses_batchupdate_wizard,group_admin_manager,1,1,1,1

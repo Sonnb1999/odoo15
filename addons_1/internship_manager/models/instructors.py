@@ -20,41 +20,34 @@ class instructors(models.Model):
     #         'domain': {'student_id': [('id', '=', ids.student_id)] }
     #     }
 
+    active_i = fields.Boolean(string='active', default=True)
+    email = fields.Char(related='teacher_id.work_email', string='Work email')
+    phone_number = fields.Char(
+        related='teacher_id.work_phone', string='work phone')
     student_count = fields.Char(
         string='number of student', compute='compute_count_student', store=False)
+
     student_id = fields.Many2one(
-        comodel_name='students', string='student name', required=True, domain="[('instructor_id','=',student_id)]", ondelete='cascade')
-
+        comodel_name='students', string='student name', required=True, domain="[('instructor_id','=',student_id)]", ondelete='cascade', copy=False)
     student_image = fields.Binary(related='student_id.student_image')
-
     student_code = fields.Char(
         related='student_id.student_code', string='student code', store=True, default="0")
-
     birthday = fields.Date(related='student_id.birthday', string='birthday')
-
-    active_i = fields.Boolean(string='active', default=True)
-
-    class_id = fields.Many2one(
-        related='student_id.class_id', string='class name', store=True)
 
     course_id = fields.Many2one(
         related='class_id.course_id', string='course name', store=True, group_expand='_read_group_stage_ids')
+    class_id = fields.Many2one(
+        related='student_id.class_id', string='class name', store=True)
 
+    department_id = fields.Many2one("hr.department", string="Department")
     teacher_id = fields.Many2one(
-        comodel_name='teachers', string='teacher name')
+        comodel_name='hr.employee', string='teacher name')
 
     plan_id = fields.One2many(related='course_id.plan_id', string="plans")
-
-    email = fields.Char(related='teacher_id.email', string='email')
-    phone_number = fields.Char(
-        related='teacher_id.phone_number', string='phone number')
-    plan_time = fields.Boolean(string="time True")
-
-    user_id = fields.Many2one(related='teacher_id.user_id', string="user_id")
+    user_id = fields.Many2one(related='teacher_id.user_id', string="User")
 
     # file
     file_register = fields.Binary(string="file register")
-
     file_report = fields.Binary(string="file report")
     file_outline = fields.Binary(string="file outline")
 
@@ -63,17 +56,25 @@ class instructors(models.Model):
 
     @api.model
     def _read_group_stage_ids(self, stages, domain, order):
-        stage_ids = self.env['courses'].search([])
-        return stage_ids
+        check_user = self.env.user.has_group(
+            'internship_manager.group_department_manager')
+            
+        if check_user == True:
+            stage_ids = self.env['courses'].search([])
+            return stage_ids
+        else:
+            stage_ids = self.env['courses'].search(
+                [('active_course', '=', 'started')])
+            return stage_ids
 
-    @api.constrains('student_id')
-    def studentValidate(self):
-        for record in self:
-            # record.student_id.id same ['student_id','id']
-            student_id = record.search_count(
-                [('student_id', '=', record.student_id.id)])
-            if student_id > 1:
-                raise ValidationError(_("Student already exists"))
+    # @api.constrains('student_id')
+    # def studentValidate(self):
+    #     for record in self:
+    #         # record.student_id.id same ['student_id','id']
+    #         student_id = record.search_count(
+    #             [('student_id', '=', record.student_id.id)])
+    #         if student_id > 1:
+    #             raise ValidationError(_("Student already exists"))
 
     @api.constrains('teacher_id')
     def count_student(self):
@@ -97,16 +98,14 @@ class instructors(models.Model):
         else:
             self.student_count = str(0)
 
-    @api.model
-    def create(self, vals_list):
-
-        # use_in_group_teacher = self.env.user.has_group(
-        #     'internship_manager.group_teacher_manager')
-        # print("ok>>>>",use_in_group_teacher)
-        # if use_in_group_teacher == True:
-        #     raise ValidationError(
-        #         'Only user belongs to admin are allowed to ....')
-        return super().create(vals_list)
+    @api.onchange('department_id')
+    def set_values_to(self):
+        if self.department_id:
+            ids = self.env['hr.employee'].search(
+                [('department_id', '=', self.department_id.id)])
+            return {
+                'domain': {'teacher_id': [('id', 'in', ids.ids)], }
+            }
 
     def write(self, vals):
         check_user = self.env.user.has_group(
